@@ -48,6 +48,15 @@ class Login
         $this->message['data'] = $data;        
     }
 
+    public function getData(){
+        if(isset($this->message['data'])){
+            return $this->message['data'];     
+        }else{
+            return null;
+        }
+               
+    }
+
     public function login(){
 
         try {
@@ -71,7 +80,12 @@ class Login
 
 
             if($user){
+
                 $this->setMessage('0',"Welcome {$user['username']}");
+
+                unset($user['PASSWORD']);
+
+                $this->setData($user);
                 
 
             }else{

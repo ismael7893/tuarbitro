@@ -43,7 +43,6 @@ class Persona
                 $this->setErrors('104','User not found');
             }
 
-            $this->CONN = null;
 
         }catch (PDOException $e) {
 
