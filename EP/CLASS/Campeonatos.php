@@ -284,8 +284,6 @@ class Campeonato
             $gsent->execute();
 
             return  $this->CONN->lastInsertId();
-
-
             //$gsent->debugDumpParams();
 
 
