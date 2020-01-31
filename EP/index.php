@@ -324,8 +324,8 @@ if(isset($_GET['type'])){
             $sport = $_GET['sport'];
             $f_inicio = $_GET['date_ini'];
             $f_fin = $_GET['date_fin'];
-            $logo = 'logoDefault.jpg';
-            $foto_perfil = 'perfilDefault.jpg';
+            $logo = 'img/logoDefault.jpg';
+            $foto_perfil = 'img/perfilDefault.jpg';
             $estado = 'Inscripcion';
             $ubication = 'Default ubicacion';
 
