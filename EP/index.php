@@ -109,6 +109,7 @@ if(isset($_GET['type'])){
 
             $CLASS_LOGIN=new Campeonato($CONN);
 
+            $idUser = $_GET['idUser'];
             $nombre = $_GET['name'];
             $estadio = $_GET['stadius'];
             $organization = $_GET['organizer'];
@@ -120,7 +121,9 @@ if(isset($_GET['type'])){
             $f_fin = $_GET['date_fin'];
             $logo = 'logoDefault.jpg';
             $foto_perfil = 'perfilDefault.jpg';
+            $estado = 'Inscripcion';
 
+            $CLASS_LOGIN->setCreate_by($idUser);
             $CLASS_LOGIN->setNombre($nombre);
             $CLASS_LOGIN->setEstadio($estadio);
             $CLASS_LOGIN->setOrganization($organization);
@@ -131,15 +134,14 @@ if(isset($_GET['type'])){
             $CLASS_LOGIN->setF_inicio($f_inicio);
             $CLASS_LOGIN->setF_fin($f_fin);
             $CLASS_LOGIN->setLogo($logo);
-            $CLASS_LOGIN->setFoto_perfil($foto_perfil);
+            $CLASS_LOGIN->setEstado($estado);
+
 
             $CLASS_LOGIN->insertCampeonato();
 
             $data = $CLASS_LOGIN->getCampeonatos();
 
             echo json_encode($data);
-
-
         break;
         case 'updatecampeonato':
             require 'CLASS/Campeonatos.php';
@@ -344,8 +346,4 @@ if(isset($_GET['type'])){
             echo '$_GET["type"] not exist';
             break;
     }
-
-    
-
 }
-
