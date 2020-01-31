@@ -316,11 +316,10 @@ if(isset($_GET['type'])){
             $CLASS_LOGIN->setLogo($default_fecha);
             $CLASS_LOGIN->setFoto_perfil('default.png');
             $CLASS_LOGIN->setUbicacion('Default ubicacion');
+            $CLASS_LOGIN->setEstado('4');
             
             
             $CLASS_LOGIN->autoGenerateCampeonato();
-
-            //echo json_encode($data);
 
         break;
 

@@ -15,6 +15,7 @@ class Campeonato
     private $logo;
     private $foto_perfil;
     private $ubicacion;
+    private $estado;
 
     private $message=[];
     private $errors=array();
@@ -238,7 +239,8 @@ class Campeonato
                 f_fin,
                 logo,
                 foto_perfil,
-                ubicacion
+                ubicacion,
+                estado
               ) 
               VALUES
                 (
@@ -252,7 +254,8 @@ class Campeonato
                 :f_fin,
                 :logo,
                 :foto_perfil,
-                :ubicacion
+                :ubicacion,
+                :estado
                 ) ;";
 
             $gsent = $this->CONN->prepare($SQL);
@@ -268,6 +271,7 @@ class Campeonato
             $gsent->bindParam(':logo', $this->logo, PDO::PARAM_STR);
             $gsent->bindParam(':foto_perfil', $this->foto_perfil, PDO::PARAM_STR);
             $gsent->bindParam(':ubicacion', $this->ubicacion, PDO::PARAM_STR);
+            $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
 
             $gsent->execute();
 
@@ -807,6 +811,16 @@ class Campeonato
 	public function setUbicacion($ubicacion)
 	{
 		$this->ubicacion = $ubicacion;
+	}
+
+	public function getEstado()
+	{
+		return $this->estado;
+	}
+
+	public function setEstado($estado)
+	{
+		$this->estado = $estado;
 	}
 }
     
