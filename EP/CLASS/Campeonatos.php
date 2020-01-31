@@ -382,8 +382,12 @@ class Campeonato
 
             $lastIdCampeonato = $this->insertCampeonato();
 
+
+
             if(isset($lastIdCampeonato)){
+
                 
+
                 $CLASS_PEOPLE=new Equipos($this->CONN);
             
                 $CLASS_PEOPLE->setCreate_by($this->create_by);
@@ -392,7 +396,7 @@ class Campeonato
                 
                 $data = $CLASS_PEOPLE->getEquiposByCreator();
     
-                //var_dump($data);
+                
                 
     
                 $max = count($data);
@@ -411,6 +415,7 @@ class Campeonato
                 }
                 $team1 = "";
                 $team2 = "";
+                $partidos_creados = 0;
     
                 while ($max > 0) {
     
@@ -425,11 +430,13 @@ class Campeonato
                         
                     }
                     $this->auto_CrearPartidos($team1,$team2);
+                    $partidos_creados++;
                     $max=$max-2;
                 
                 }
     
                 $ultimo_registro = $this->getCampeonatosForId();
+                $ultimo_registro['partidos'] = $partidos_creados;
     
                 $this->setData($ultimo_registro);
     
@@ -471,14 +478,10 @@ class Campeonato
 
             $gsent->setFetchMode(PDO::FETCH_ASSOC);
 
-            $gsent->execute();
-
-            $cuenta = $gsent->rowCount();
-
-            if($cuenta>0)return true;
-            else return false;
-
             //$gsent->debugDumpParams();
+
+            return $gsent->execute();
+
 
         }catch (PDOException $e) {
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
@@ -698,7 +701,7 @@ class Campeonato
 
             $gsent->execute();
 
-            //$gsent->debugDumpParams();
+            $gsent->debugDumpParams();
 
             $data=array();
 

@@ -8,6 +8,7 @@ class Equipos
     private $tecnico;
     private $imagen;
     private $create_by;
+    private $campeonato;
     private $message=[];
     private $errors=array();
     private $error=array();    
@@ -39,6 +40,42 @@ class Equipos
             }
 
             return $data;
+
+        }catch (PDOException $e) {
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+        }catch (Exception $e) {
+            $this->setErrors('102',"General Error ".$e->getMessage());
+        }
+        
+    }
+
+    public function getEquipoByCampeonato(){
+
+        try {
+
+            $SQL="SELECT * FROM equipos WHERE campeonato=:campeonato";
+
+            $gsent = $this->CONN->prepare($SQL);
+            
+            $gsent->bindValue(':campeonato', $this->campeonato, PDO::PARAM_INT);
+
+            $gsent->setFetchMode(PDO::FETCH_ASSOC);
+
+            if($gsent->execute()){
+
+                $data=array();
+
+                while ($row =  $gsent->fetch()){
+                   $data[]=$row;
+                }
+    
+                return $data;
+
+            }else{
+                $this->setErrors('104','Championship not found');
+            }
+
+            //$gsent->debugDumpParams();
 
         }catch (PDOException $e) {
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
@@ -146,5 +183,15 @@ class Equipos
 	public function setCreate_by($create_by)
 	{
 		$this->create_by = $create_by;
+	}
+
+	public function getCampeonato()
+	{
+		return $this->campeonato;
+	}
+
+	public function setCampeonato($campeonato)
+	{
+		$this->campeonato = $campeonato;
 	}
 }

@@ -105,35 +105,28 @@ if(isset($_GET['type'])){
         case 'insertcampeonato':
             require 'CLASS/Campeonatos.php';
 
+                
+
             $CLASS_LOGIN=new Campeonato($CONN);
 
-            $idUser = $_GET['idUser'];
-            $nombre = $_GET['name'];
-            $estadio = $_GET['stadius'];
-            $organization = $_GET['organizer'];
+            $nombre = 'nuevo campeonato';
+            $estadio = 'estadio 1';
+            $organization = 'organization 1';
             $seguidores = 0;
-            $description = $_GET['description'];
-            $tipe = $_GET['tipe'];
-            $sport = $_GET['sport'];
-            $f_inicio = $_GET['date_ini'];
-            $f_fin = $_GET['date_fin'];
-            $logo = 'logoDefault.jpg';
-            $foto_perfil = 'perfilDefault.jpg';
-            $estado = 'Inscripcion';
+            $description = 'campeonato 1 descripcion';
+            $f_inicio = '2019-05-10';
+            $f_fin = '2019-05-15';
+            $logo = 'logo.jpg';
+            $foto_perfil = 'foto_perfil.png';
 
-            $CLASS_LOGIN->setCreate_by($idUser);
             $CLASS_LOGIN->setNombre($nombre);
             $CLASS_LOGIN->setEstadio($estadio);
             $CLASS_LOGIN->setOrganization($organization);
             $CLASS_LOGIN->setSeguidores($seguidores);
             $CLASS_LOGIN->setDescription($description);
-            $CLASS_LOGIN->setTipe($tipe);
-            $CLASS_LOGIN->setSport($sport);
             $CLASS_LOGIN->setF_inicio($f_inicio);
             $CLASS_LOGIN->setF_fin($f_fin);
             $CLASS_LOGIN->setLogo($logo);
-            $CLASS_LOGIN->setEstado($estado);
-
             $CLASS_LOGIN->setFoto_perfil($foto_perfil);
 
             $CLASS_LOGIN->insertCampeonato();
@@ -296,12 +289,12 @@ if(isset($_GET['type'])){
             if($ok){
                 
 
-                $CLASS_LOGIN=new Campeonato($CONN);
+                $CLASS_CAMPEONATO=new Campeonato($CONN);
 
-                $CLASS_LOGIN->setId($id);
+                $CLASS_CAMPEONATO->setId($id);
 
-                $data=$CLASS_LOGIN->getCampeonatosForId();
-                $data['partidos']=$CLASS_LOGIN->getPartidos();
+                $data=$CLASS_CAMPEONATO->getCampeonatosForId();
+                $data['partidos']=$CLASS_CAMPEONATO->getPartidos();
                 
                 echo json_encode($data);
 
@@ -314,36 +307,27 @@ if(isset($_GET['type'])){
 
             $CLASS_CAMPEONATO=new Campeonato($CONN);
 
-            $idUser = $_GET['idUser'];
-            $nombre = $_GET['name'];
-            $estadio = $_GET['stadius'];
-            $organization = $_GET['organizer'];
-            $seguidores = 0;
-            $description = $_GET['description'];
-            $tipe = $_GET['tipe'];
-            $sport = $_GET['sport'];
-            $f_inicio = $_GET['date_ini'];
-            $f_fin = $_GET['date_fin'];
-            $logo = 'img/logoDefault.jpg';
-            $foto_perfil = 'img/perfilDefault.jpg';
-            $estado = 'Inscripcion';
-            $ubication = 'Default ubicacion';
+            $default_fecha=date('Y-m-d');
 
-            $CLASS_CAMPEONATO->setCreate_by($idUser);
-            $CLASS_CAMPEONATO->setNombre($nombre);
-            $CLASS_CAMPEONATO->setEstadio($estadio);
-            $CLASS_CAMPEONATO->setOrganization($organization);
-            $CLASS_CAMPEONATO->setSeguidores($seguidores);
-            $CLASS_CAMPEONATO->setDescription($description);
-            $CLASS_CAMPEONATO->setTipe($tipe);
-            $CLASS_CAMPEONATO->setSport($sport);
-            $CLASS_CAMPEONATO->setF_inicio($f_inicio);
-            $CLASS_CAMPEONATO->setF_fin($f_fin);
-            $CLASS_CAMPEONATO->setLogo($logo);
-            $CLASS_CAMPEONATO->setEstado($estado);
-            $CLASS_CAMPEONATO->setFoto_perfil($foto_perfil);
-            $CLASS_CAMPEONATO->setUbicacion($ubication);
+            $default_hora=date('h:i:s');
 
+            
+            $CLASS_CAMPEONATO->setCreate_by('user2');
+            $CLASS_CAMPEONATO->setNombre('Default nombre');
+            $CLASS_CAMPEONATO->setEstadio('Default estadio');
+            $CLASS_CAMPEONATO->setOrganization('Default organizacion');
+            $CLASS_CAMPEONATO->setSeguidores('Default seguidores');
+            $CLASS_CAMPEONATO->setDescription('Default descripcion');
+            $CLASS_CAMPEONATO->setTipe('Default tipe');
+            $CLASS_CAMPEONATO->setSport('Default sport');
+            $CLASS_CAMPEONATO->setF_inicio($default_fecha);
+            $CLASS_CAMPEONATO->setF_fin($default_fecha);
+            $CLASS_CAMPEONATO->setLogo("DefaultLogo.png");
+            $CLASS_CAMPEONATO->setFoto_perfil('default.png');
+            $CLASS_CAMPEONATO->setUbicacion('Default ubicacion');
+            $CLASS_CAMPEONATO->setEstado('4');
+            
+            
             $CLASS_CAMPEONATO->autoGenerateCampeonato();
 
             $menssage = $CLASS_CAMPEONATO->getMessage();
@@ -361,6 +345,19 @@ if(isset($_GET['type'])){
             $CLASS_LOGIN->setCreate_by(1);
             
             $data = $CLASS_LOGIN->getEquiposByCreator();
+
+            echo json_encode($data);
+
+        break;
+
+        case 'teambychamp':
+            require 'CLASS/Equipos.php';
+
+            $CLASS_LOGIN=new Equipos($CONN);
+
+            $CLASS_LOGIN->setCampeonato(1);
+            
+            $data = $CLASS_LOGIN->getEquipoByCampeonato();
 
             echo json_encode($data);
 
