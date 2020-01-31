@@ -690,6 +690,10 @@ class Campeonato
     public function getPartidos(){
 
         try {
+            include 'Estado.php';
+
+            $CLASS_ESTADO = new Estado($this->CONN);
+
 
             $SQL="SELECT * from partidos WHERE campeonato=:campeonato ";
 
@@ -701,12 +705,14 @@ class Campeonato
 
             $gsent->execute();
 
-            $gsent->debugDumpParams();
+            //$gsent->debugDumpParams();
 
             $data=array();
 
             while ($row =  $gsent->fetch()){
                 $row['comentarios']=$this->getComments_Partidos($row['id']);
+                $CLASS_ESTADO->setId($row['estado']);
+                $row['estado'] = $CLASS_ESTADO->getEstadoById();
                 $data[]=$row;
             }
             

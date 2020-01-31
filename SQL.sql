@@ -262,35 +262,36 @@ CREATE TABLE `partidos` (
   `equipo2_goles` int(11) NOT NULL,
   `fecha` varchar(20) DEFAULT NULL,
   `hora` varchar(20) DEFAULT NULL,
+  `estado` char(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `partidos` */
 
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (22,20,'equipo 3','equipo 9',0,0,'2020-01-31','03:50:19');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (23,20,'equipo 1','equipo 6',0,0,'2020-01-31','03:50:20');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (24,20,'equipo 10','equipo 4',0,0,'2020-01-31','03:50:20');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (25,20,'equipo 2','equipo 7',0,0,'2020-01-31','03:50:20');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (26,20,'equipo 8','equipo 5',0,0,'2020-01-31','03:50:20');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (27,20,'equipo 11','',0,0,'2020-01-31','03:50:20');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (28,21,'equipo 5','equipo 7',0,0,'2020-01-31','03:53:03');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (29,21,'equipo 2','equipo 1',0,0,'2020-01-31','03:53:03');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (30,21,'equipo 11','equipo 8',0,0,'2020-01-31','03:53:03');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (31,21,'equipo 4','equipo 6',0,0,'2020-01-31','03:53:03');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (32,21,'equipo 9','equipo 3',0,0,'2020-01-31','03:53:03');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (33,21,'equipo 10','',0,0,'2020-01-31','03:53:03');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (34,22,'equipo 10','equipo 3',0,0,'2020-01-31','03:53:18');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (35,22,'equipo 1','equipo 5',0,0,'2020-01-31','03:53:19');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (36,22,'equipo 4','equipo 11',0,0,'2020-01-31','03:53:19');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (37,22,'equipo 2','equipo 8',0,0,'2020-01-31','03:53:19');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (38,22,'equipo 6','equipo 7',0,0,'2020-01-31','03:53:19');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (39,22,'equipo 9','',0,0,'2020-01-31','03:53:19');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (40,23,'equipo 10','equipo 7',0,0,'2020-01-31','03:55:58');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (41,23,'equipo 2','equipo 3',0,0,'2020-01-31','03:55:58');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (42,23,'equipo 4','equipo 8',0,0,'2020-01-31','03:55:58');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (43,23,'equipo 6','equipo 9',0,0,'2020-01-31','03:55:58');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (44,23,'equipo 1','equipo 11',0,0,'2020-01-31','03:55:58');
-insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`) values (45,23,'equipo 5','',0,0,'2020-01-31','03:55:58');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (22,20,'equipo 3','equipo 9',0,0,'2020-01-31','03:50:19','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (23,20,'equipo 1','equipo 6',0,0,'2020-01-31','03:50:20','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (24,20,'equipo 10','equipo 4',0,0,'2020-01-31','03:50:20','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (25,20,'equipo 2','equipo 7',0,0,'2020-01-31','03:50:20','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (26,20,'equipo 8','equipo 5',0,0,'2020-01-31','03:50:20','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (27,20,'equipo 11','',0,0,'2020-01-31','03:50:20','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (28,21,'equipo 5','equipo 7',0,0,'2020-01-31','03:53:03','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (29,21,'equipo 2','equipo 1',0,0,'2020-01-31','03:53:03','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (30,21,'equipo 11','equipo 8',0,0,'2020-01-31','03:53:03','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (31,21,'equipo 4','equipo 6',0,0,'2020-01-31','03:53:03','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (32,21,'equipo 9','equipo 3',0,0,'2020-01-31','03:53:03','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (33,21,'equipo 10','',0,0,'2020-01-31','03:53:03','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (34,22,'equipo 10','equipo 3',0,0,'2020-01-31','03:53:18','1');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (35,22,'equipo 1','equipo 5',0,0,'2020-01-31','03:53:19','4');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (36,22,'equipo 4','equipo 11',0,0,'2020-01-31','03:53:19','4');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (37,22,'equipo 2','equipo 8',0,0,'2020-01-31','03:53:19','4');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (38,22,'equipo 6','equipo 7',0,0,'2020-01-31','03:53:19','3');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (39,22,'equipo 9','',0,0,'2020-01-31','03:53:19','3');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (40,23,'equipo 10','equipo 7',0,0,'2020-01-31','03:55:58','3');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (41,23,'equipo 2','equipo 3',0,0,'2020-01-31','03:55:58','3');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (42,23,'equipo 4','equipo 8',0,0,'2020-01-31','03:55:58','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (43,23,'equipo 6','equipo 9',0,0,'2020-01-31','03:55:58','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (44,23,'equipo 1','equipo 11',0,0,'2020-01-31','03:55:58','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (45,23,'equipo 5','',0,0,'2020-01-31','03:55:58','2');
 
 /*Table structure for table `persona` */
 

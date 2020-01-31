@@ -86,14 +86,39 @@ if(isset($_GET['type'])){
             if($ok){
                 
 
+                $CLASS_CAMPEONATO=new Campeonato($CONN);
+
+                $CLASS_CAMPEONATO->setId($id);
+
+                $data=$CLASS_CAMPEONATO->getCampeonatosForId();
+                $data['contactos']=$CLASS_CAMPEONATO->getContact();
+                $data['categorias']=$CLASS_CAMPEONATO->getCategorias();
+                $data['comentarios']=$CLASS_CAMPEONATO->getComments_Campeonatos();
+                $data['partidos']=$CLASS_CAMPEONATO->getPartidos();
+
+                echo json_encode($data);
+
+            }
+
+        break;
+
+        case 'matchbychamp':
+            require 'CLASS/Campeonatos.php';
+
+            $ok=true;
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];            
+
+            if($ok){
+                
+
                 $CLASS_LOGIN=new Campeonato($CONN);
 
                 $CLASS_LOGIN->setId($id);
 
                 $data=$CLASS_LOGIN->getCampeonatosForId();
-                $data['contactos']=$CLASS_LOGIN->getContact();
-                $data['categorias']=$CLASS_LOGIN->getCategorias();
-                $data['comentarios']=$CLASS_LOGIN->getComments_Campeonatos();
                 $data['partidos']=$CLASS_LOGIN->getPartidos();
 
                 echo json_encode($data);
