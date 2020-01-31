@@ -466,7 +466,7 @@ class Campeonato
 
             //echo "<p>INSERT  INTO `partidos` VALUES (NULL,$this->id,$team1,$team2,0,0,$fecha,$hora)</p>";
 
-            $SQL="INSERT INTO partidos VALUES (NULL,:idCampeonato,:team1,:team2,0,0,:fecha,:hora);";
+            $SQL="INSERT INTO partidos VALUES (NULL,:idCampeonato,:team1,:team2,0,0,:fecha,:hora,'2');";
 
             $gsent = $this->CONN->prepare($SQL);
 

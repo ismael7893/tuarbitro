@@ -74,7 +74,7 @@ if(isset($_GET['type'])){
 
         break;
 
-        case 'campeonatos':
+        case 'champbyid':
             require 'CLASS/Campeonatos.php';
 
             $ok=true;
@@ -91,10 +91,6 @@ if(isset($_GET['type'])){
                 $CLASS_CAMPEONATO->setId($id);
 
                 $data=$CLASS_CAMPEONATO->getCampeonatosForId();
-                $data['contactos']=$CLASS_CAMPEONATO->getContact();
-                $data['categorias']=$CLASS_CAMPEONATO->getCategorias();
-                $data['comentarios']=$CLASS_CAMPEONATO->getComments_Campeonatos();
-                $data['partidos']=$CLASS_CAMPEONATO->getPartidos();
 
                 echo json_encode($data);
 

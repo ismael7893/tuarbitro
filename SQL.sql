@@ -48,7 +48,7 @@ CREATE TABLE `campeonatos` (
   `ubicacion` varchar(250) DEFAULT NULL,
   `estado` char(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `campeonatos` */
 
@@ -64,6 +64,12 @@ insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`s
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (21,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (22,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (23,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (24,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (25,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (26,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (27,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (28,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (29,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
 
 /*Table structure for table `categorias` */
 
@@ -264,7 +270,7 @@ CREATE TABLE `partidos` (
   `hora` varchar(20) DEFAULT NULL,
   `estado` char(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `partidos` */
 
@@ -292,6 +298,12 @@ insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_gol
 insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (43,23,'equipo 6','equipo 9',0,0,'2020-01-31','03:55:58','2');
 insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (44,23,'equipo 1','equipo 11',0,0,'2020-01-31','03:55:58','2');
 insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (45,23,'equipo 5','',0,0,'2020-01-31','03:55:58','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (46,29,'equipo 3','equipo 6',0,0,'2020-01-31','05:45:27','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (47,29,'equipo 8','equipo 11',0,0,'2020-01-31','05:45:27','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (48,29,'equipo 2','equipo 7',0,0,'2020-01-31','05:45:27','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (49,29,'equipo 4','equipo 10',0,0,'2020-01-31','05:45:27','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (50,29,'equipo 5','equipo 1',0,0,'2020-01-31','05:45:27','2');
+insert  into `partidos`(`id`,`campeonato`,`equipo1_id`,`equipo2_id`,`equipo1_goles`,`equipo2_goles`,`fecha`,`hora`,`estado`) values (51,29,'equipo 9','',0,0,'2020-01-31','05:45:27','2');
 
 /*Table structure for table `persona` */
 
