@@ -109,21 +109,25 @@ if(isset($_GET['type'])){
 
             $CLASS_LOGIN=new Campeonato($CONN);
 
-            $nombre = 'nuevo campeonato';
-            $estadio = 'estadio 1';
-            $organization = 'organization 1';
+            $nombre = $_GET['name'];
+            $estadio = $_GET['stadius'];
+            $organization = $_GET['organizer'];
             $seguidores = 0;
-            $description = 'campeonato 1 descripcion';
-            $f_inicio = '2019-05-10';
-            $f_fin = '2019-05-15';
-            $logo = 'logo.jpg';
-            $foto_perfil = 'foto_perfil.png';
+            $description = $_GET['description'];
+            $tipe = $_GET['tipe'];
+            $sport = $_GET['sport'];
+            $f_inicio = $_GET['date_ini'];
+            $f_fin = $_GET['date_fin'];
+            $logo = 'logoDefault.jpg';
+            $foto_perfil = 'perfilDefault.jpg';
 
             $CLASS_LOGIN->setNombre($nombre);
             $CLASS_LOGIN->setEstadio($estadio);
             $CLASS_LOGIN->setOrganization($organization);
             $CLASS_LOGIN->setSeguidores($seguidores);
             $CLASS_LOGIN->setDescription($description);
+            $CLASS_LOGIN->setTipe($tipe);
+            $CLASS_LOGIN->setSport($sport);
             $CLASS_LOGIN->setF_inicio($f_inicio);
             $CLASS_LOGIN->setF_fin($f_fin);
             $CLASS_LOGIN->setLogo($logo);
@@ -337,7 +341,7 @@ if(isset($_GET['type'])){
         break;
         
         default:
-            # code...
+            echo '$_GET["type"] not exist';
             break;
     }
 

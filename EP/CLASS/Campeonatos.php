@@ -10,6 +10,8 @@ class Campeonato
     private $organization;
     private $seguidores;
     private $description;
+    private $tipe;
+    private $sport;
     private $f_inicio;
     private $f_fin;
     private $logo;
@@ -235,6 +237,8 @@ class Campeonato
                 organization,
                 seguidores,
                 description,
+                tipe,
+                sport,
                 f_inicio,
                 f_fin,
                 logo,
@@ -266,6 +270,8 @@ class Campeonato
             $gsent->bindParam(':organization', $this->organization, PDO::PARAM_STR);
             $gsent->bindParam(':seguidores', $this->seguidores, PDO::PARAM_INT);
             $gsent->bindParam(':description', $this->description, PDO::PARAM_STR);
+            $gsent->bindParam(':tipe', $this->tipe, PDO::PARAM_STR);
+            $gsent->bindParam(':sport', $this->sport, PDO::PARAM_STR);
             $gsent->bindParam(':f_inicio', $this->f_inicio, PDO::PARAM_STR);
             $gsent->bindParam(':f_fin', $this->f_fin, PDO::PARAM_STR);
             $gsent->bindParam(':logo', $this->logo, PDO::PARAM_STR);
@@ -745,7 +751,14 @@ class Campeonato
 	public function setDescription($description){
 		$this->description = $description;
 	}
-
+    public function setTipe($tipe)
+    {
+        $this->tipe = $tipe;
+    }
+    public function setSport($sport)
+    {
+        $this->sport = $sport;
+    }
 	public function getF_inicio(){
 		return $this->f_inicio;
 	}
