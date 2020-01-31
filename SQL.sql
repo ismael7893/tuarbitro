@@ -40,6 +40,8 @@ CREATE TABLE `campeonatos` (
   `organization` varchar(20) NOT NULL,
   `seguidores` int(11) NOT NULL,
   `description` varchar(150) NOT NULL,
+  `tipe` varchar(100) NOT NULL,
+  `sport` varchar(100) NOT NULL,
   `f_inicio` varchar(20) DEFAULT NULL,
   `f_fin` varchar(20) DEFAULT NULL,
   `logo` varchar(100) DEFAULT NULL,
@@ -50,8 +52,6 @@ CREATE TABLE `campeonatos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `campeonatos` */
-
-insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (3,'1','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','2020-01-31','2020-01-31','2020-01-31','default.png','Default ubicacion','4');
 
 /*Table structure for table `categorias` */
 

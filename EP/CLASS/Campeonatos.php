@@ -10,14 +10,14 @@ class Campeonato
     private $organization;
     private $seguidores;
     private $description;
-    private $tipe;
-    private $sport;
     private $f_inicio;
     private $f_fin;
     private $logo;
     private $foto_perfil;
     private $ubicacion;
     private $estado;
+    private $tipe;
+    private $sport;
 
     private $message=[];
     private $errors=array();
@@ -230,7 +230,7 @@ class Campeonato
 
         try {
 
-            $SQL= "INSERT INTO campeonatos (
+            $SQL="INSERT INTO campeonatos (
                 create_by,
                 nombre,
                 estadio,
@@ -281,11 +281,20 @@ class Campeonato
             $gsent->bindParam(':ubicacion', $this->ubicacion, PDO::PARAM_STR);
             $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
 
-            $gsent->execute();
+            if($gsent->execute()){
+                //$gsent->debugDumpParams();
+                $this->setMessage('0',"Campeonato creado con exito!");
 
-            return  $this->CONN->lastInsertId();
-            //$gsent->debugDumpParams();
+                return  $this->CONN->lastInsertId();    
 
+
+
+            }
+            else{
+                $this->setErrors('105','No se pudo crear el campeonato');
+
+                return null;
+            }
 
         }catch (PDOException $e) {
 
@@ -370,59 +379,65 @@ class Campeonato
         
         require 'Equipos.php';
         try {
+
             $lastIdCampeonato = $this->insertCampeonato();
 
-            $CLASS_PEOPLE=new Equipos($this->CONN);
+            if(isset($lastIdCampeonato)){
+                
+                $CLASS_PEOPLE=new Equipos($this->CONN);
             
-            $CLASS_PEOPLE->setCreate_by($this->create_by);
-
-            $this->setId($lastIdCampeonato);
-            
-            $data = $CLASS_PEOPLE->getEquiposByCreator();
-
-            //var_dump($data);
-            
-
-            $max = count($data);
-            $done = false;
-            $numbers;
-            while(!$done){
-                $numbers = range(0, $max-1);
-                shuffle($numbers);
-                $done = true;
-                foreach($numbers as $key => $val){
-                    if($key == $val){
-                        $done = false;
-                        break;
+                $CLASS_PEOPLE->setCreate_by($this->create_by);
+    
+                $this->setId($lastIdCampeonato);
+                
+                $data = $CLASS_PEOPLE->getEquiposByCreator();
+    
+                //var_dump($data);
+                
+    
+                $max = count($data);
+                $done = false;
+                $numbers;
+                while(!$done){
+                    $numbers = range(0, $max-1);
+                    shuffle($numbers);
+                    $done = true;
+                    foreach($numbers as $key => $val){
+                        if($key == $val){
+                            $done = false;
+                            break;
+                        }
                     }
                 }
-            }
-            $team1 = "";
-            $team2 = "";
-
-            while ($max > 0) {
-
-                $team1 = $data[$numbers[$max-1]]['name'];
-                
-                //echo "<br/>";
-                //echo $data[$numbers[$max-1]]['name'];
-
-                //echo " vs ";
-
-                if(isset($numbers[$max-2])){
-                
-                    //echo $data[$numbers[$max-2]]['name'];
-                    $team2 = $data[$numbers[$max-2]]['name'];
-                
-                }
-                else{
-                    $team2 = "";
+                $team1 = "";
+                $team2 = "";
+    
+                while ($max > 0) {
+    
+                    $team1 = $data[$numbers[$max-1]]['name'];
                     
+                    if(isset($numbers[$max-2])){
+                    
+                        $team2 = $data[$numbers[$max-2]]['name'];
+                    }
+                    else{
+                        $team2 = "";
+                        
+                    }
+                    $this->auto_CrearPartidos($team1,$team2);
+                    $max=$max-2;
+                
                 }
-                $this->auto_CrearPartidos($team1,$team2);
-                $max=$max-2;
-            
+    
+                $ultimo_registro = $this->getCampeonatosForId();
+    
+                $this->setData($ultimo_registro);
+    
             }
+
+
+
+            
             
 
         }catch (PDOException $e) {
@@ -751,14 +766,7 @@ class Campeonato
 	public function setDescription($description){
 		$this->description = $description;
 	}
-    public function setTipe($tipe)
-    {
-        $this->tipe = $tipe;
-    }
-    public function setSport($sport)
-    {
-        $this->sport = $sport;
-    }
+
 	public function getF_inicio(){
 		return $this->f_inicio;
 	}
@@ -777,7 +785,12 @@ class Campeonato
 
 	public function getLogo(){
 		return $this->logo;
+    }
+
+    public function getMessage(){
+		return $this->message;
 	}
+    
 
 	public function setLogo($logo){
 		$this->logo = $logo;
@@ -834,6 +847,26 @@ class Campeonato
 	public function setEstado($estado)
 	{
 		$this->estado = $estado;
+	}
+
+	public function getTipe()
+	{
+		return $this->tipe;
+	}
+
+	public function setTipe($tipe)
+	{
+		$this->tipe = $tipe;
+	}
+
+	public function getSport()
+	{
+		return $this->sport;
+	}
+
+	public function setSport($sport)
+	{
+		$this->sport = $sport;
 	}
 }
     
