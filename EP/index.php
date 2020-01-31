@@ -17,42 +17,58 @@ if(isset($_GET['type'])){
     switch ($type) {
         case 'login':
 
+            
+
+            if (!isset($_GET['username'])) die;
+            if (!isset($_GET['password'])) die;
+
             session_start();
 
             require 'CLASS/Login.php';
             require 'CLASS/Roles.php';
-
-            if (!isset($_GET['username'])) die;
-            if (!isset($_GET['password'])) die;
+            require 'CLASS/Persona.php';
             
             $username = $_GET['username'];
             $password = $_GET['password'];            
 
             $CLASS_LOGIN=new Login($CONN);
             $CLASS_ROLE=new Role($CONN);
+            $CLASS_PERSONA=new Persona($CONN);
 
             $CLASS_LOGIN->setUsername($username);
             $CLASS_LOGIN->setPassword($password);
+            
 
             $CLASS_LOGIN->login();
 
             $data_login = $CLASS_LOGIN->getData();
 
             if(isset($data_login)){
+
                 $role = $data_login['role'];
+
+                $user = $data_login['username'];
             
                 $CLASS_ROLE->setId($role);
+
+                $CLASS_PERSONA->setId($user);
     
                 $data_role = $CLASS_ROLE->getRole();
     
                 $_SESSION['ROLE'] = $data_role['title'];                
+
+                $menssage = $CLASS_LOGIN->getMessage();
+
+                $persona = $CLASS_PERSONA->getPersonaForId();
+
+                $menssage['data']['name'] = $persona['NAME'];
+
             }else{
+
                 session_destroy();
+
+                $menssage = $CLASS_LOGIN->getMessage();
             }
-
-
-
-            $menssage = $CLASS_LOGIN->getMessage();
 
             echo json_encode($menssage);
 
@@ -225,7 +241,7 @@ if(isset($_GET['type'])){
 
         break;
 
-        case 'getcampeonatos':
+        case 'listcampeonatos':
             require 'CLASS/Campeonatos.php';
 
             $CLASS_LOGIN=new Campeonato($CONN);
@@ -233,6 +249,48 @@ if(isset($_GET['type'])){
             $data = $CLASS_LOGIN->getCampeonatos();
 
             echo json_encode($data);
+
+        break;
+
+        case 'campeonatosporcreador':
+            require 'CLASS/Campeonatos.php';
+
+            $CLASS_CAMPEONATO=new Campeonato($CONN);
+
+            if(isset($_GET['user'])){
+                
+                $user = $_GET['user'];
+
+                $CLASS_CAMPEONATO->setCreate_by($user);
+            
+                $data = $CLASS_CAMPEONATO->getCampeonatosCreadosPorUsuario();
+
+                echo json_encode($data);
+            }
+            
+
+            
+
+        break;
+
+        case 'getteamsbychamp':
+            require 'CLASS/Campeonatos.php';
+
+            $CLASS_CAMPEONATO=new Campeonato($CONN);
+
+            if(isset($_GET['champ'])){
+                
+                $campeonato = $_GET['champ'];
+
+                $CLASS_CAMPEONATO->setCreate_by($user);
+            
+                $data = $CLASS_CAMPEONATO->getCampeonatosCreadosPorUsuario();
+
+                echo json_encode($data);
+            }
+            
+
+            
 
         break;
 

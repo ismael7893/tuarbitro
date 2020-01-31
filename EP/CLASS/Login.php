@@ -50,10 +50,11 @@ class Login
 
     public function getData(){
         if(isset($this->message['data'])){
-            return $this->message['data'];     
+            return $this->message['data']; 
         }else{
             return null;
         }
+            
                
     }
 
@@ -81,7 +82,7 @@ class Login
 
             if($user){
 
-                $this->setMessage('0',"Welcome {$user['username']}");
+                $this->setMessage('0',"Login successful");
 
                 unset($user['PASSWORD']);
 

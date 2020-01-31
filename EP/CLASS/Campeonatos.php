@@ -67,6 +67,44 @@ class Campeonato
         
     }
 
+    public function getCampeonatosCreadosPorUsuario(){
+
+        try {
+
+            $SQL="SELECT * from campeonatos WHERE create_by=:create_by";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':create_by', $this->create_by, PDO::PARAM_STR);
+
+            $gsent->setFetchMode(PDO::FETCH_ASSOC);
+
+            $gsent->execute();
+
+            //$gsent->debugDumpParams();
+
+            $data=array();
+
+            while ($row =  $gsent->fetch()){
+               $data[]=$row;
+            }
+
+            return $data;
+            
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
     public function getCampeonatos(){
 
         try {

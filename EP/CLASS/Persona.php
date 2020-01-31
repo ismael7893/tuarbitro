@@ -24,7 +24,7 @@ class Persona
 
             $gsent = $this->CONN->prepare($SQL);
 
-            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $gsent->bindValue(':id', $this->id, PDO::PARAM_STR);
 
             $gsent->setFetchMode(PDO::FETCH_ASSOC);
 
