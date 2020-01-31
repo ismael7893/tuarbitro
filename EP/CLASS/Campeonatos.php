@@ -230,7 +230,7 @@ class Campeonato
 
         try {
 
-            $SQL="INSERT INTO campeonatos (
+            $SQL= "INSERT INTO campeonatos (
                 create_by,
                 nombre,
                 estadio,
@@ -254,6 +254,8 @@ class Campeonato
                 :organization,
                 :seguidores,
                 :description,
+                :tipe,
+                :sport,
                 :f_inicio,
                 :f_fin,
                 :logo,
