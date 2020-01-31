@@ -362,6 +362,19 @@ if(isset($_GET['type'])){
             echo json_encode($data);
 
         break;
+
+        case 'playerbyteam':
+            require 'CLASS/Jugadores.php';
+
+            $CLASS_LOGIN=new Jugadores($CONN);
+
+            $CLASS_LOGIN->setEquipo(1);
+            
+            $data = $CLASS_LOGIN->getJugadoresByTeam();
+
+            echo json_encode($data);
+
+        break;
         
         default:
             # code...
