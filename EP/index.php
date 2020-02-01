@@ -452,6 +452,55 @@ if(isset($_GET['type'])){
             echo json_encode($data);
 
         break;
+
+        case 'uploadimage':
+
+            $target_dir = "IMG/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            
+            if(isset($_POST["submit"])) {
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                if($check !== false) {
+                    $uploadOk = 1;
+                } else {
+                    echo "El archivo no es una imagen.";
+                    $uploadOk = 0;
+                }
+            }
+            
+            if (file_exists($target_file)) {
+                echo "Lo sentimos, este archivo ya existe.";
+                $uploadOk = 0;
+            }
+            
+            if ($_FILES["fileToUpload"]["size"] > 500000) {
+                
+                echo "Lo sentimos, el archivo exede el limite de tamaño.";
+                $uploadOk = 0;
+            }
+            
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+                
+                echo "Lo sentimos, solo imagenes JPG, JPEG, PNG .";
+                $uploadOk = 0;
+            }
+            
+            if ($uploadOk == 0) {
+                
+                echo "Error al subir el archivo.";
+            
+            } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    
+                    echo "El archivo ". basename( $_FILES["fileToUpload"]["name"]). " ha sido subido.";
+                } else {
+                    echo "Lo sentimos, hubo un error al subir tu archivo.";
+                }
+            }
+
+        break;
         
         default:
             # code...
