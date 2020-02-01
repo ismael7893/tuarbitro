@@ -100,6 +100,44 @@ class Estado
         
     }
 
+    public function listEstados(){
+
+        try {
+
+            $SQL="SELECT * from estados ";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            $gsent->setFetchMode(PDO::FETCH_ASSOC);
+
+            $gsent->execute();
+
+            //$gsent->debugDumpParams();
+
+            $data=array();
+
+            while ($row =  $gsent->fetch()){
+               $data[]=$row;
+            }
+
+            return $data;
+            
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
 
 
 	public function getTitle()

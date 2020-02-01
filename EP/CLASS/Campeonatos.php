@@ -33,6 +33,10 @@ class Campeonato
 
         try {
 
+            include 'Estado.php';
+
+            $CLASS_ESTADO = new Estado($this->CONN);
+
             $SQL="SELECT * from campeonatos WHERE id=:id";
 
             $gsent = $this->CONN->prepare($SQL);
@@ -48,7 +52,8 @@ class Campeonato
             $result = $gsent->fetch();
 
             if($result){
-                
+                $CLASS_ESTADO->setId($result['estado']);
+                $result['estado'] = $CLASS_ESTADO->getEstadoById();
                 return $result;
 
             }else{
@@ -181,6 +186,61 @@ class Campeonato
             $gsent->bindParam(':foto_perfil', $this->foto_perfil, PDO::PARAM_STR);
             $gsent->bindParam(':sport', $this->sport, PDO::PARAM_STR);
             $gsent->bindParam(':tipe', $this->tipe, PDO::PARAM_STR);
+            $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
+
+            //$gsent->debugDumpParams();
+          
+            if($gsent->execute()){
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+                    $this->setMessage('0',"Campeonato actualizado con exito!");
+
+                    $data = $this->getCampeonatosForId();
+                    
+                    $this->setData($data);
+                }else{
+                    $this->setErrors('105','Error al actualizar el campeonato!');
+                }
+
+                
+
+            }else{
+                $this->setErrors('105','Error al actualizar el campeonato!');
+
+            }
+
+            
+
+            
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
+    public function changeEstado(){
+
+        try {
+
+            $SQL="UPDATE 
+            campeonatos 
+        SET
+            estado = :estado
+        WHERE id = :id;";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindParam(':id', $this->id, PDO::PARAM_INT);
             $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
 
             //$gsent->debugDumpParams();
@@ -748,6 +808,39 @@ class Campeonato
                 $row['comentarios']=$this->getComments_Partidos($row['id']);
                 $CLASS_ESTADO->setId($row['estado']);
                 $row['estado'] = $CLASS_ESTADO->getEstadoById();
+                $data[]=$row;
+            }
+            
+
+            return $data;
+
+        }catch (PDOException $e) {
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+        }catch (Exception $e) {
+            $this->setErrors('102',"General Error ".$e->getMessage());
+        }
+        
+    }
+
+    public function getEquipos(){
+
+        try {
+
+            $SQL="SELECT * from equipos WHERE campeonato=:campeonato ";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':campeonato', $this->id, PDO::PARAM_INT);
+
+            $gsent->setFetchMode(PDO::FETCH_ASSOC);
+
+            $gsent->execute();
+
+            //$gsent->debugDumpParams();
+
+            $data=array();
+
+            while ($row =  $gsent->fetch()){
                 $data[]=$row;
             }
             

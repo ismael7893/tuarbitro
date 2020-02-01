@@ -124,6 +124,51 @@ if(isset($_GET['type'])){
 
         break;
 
+        case 'teamsbychampid':
+            require 'CLASS/Campeonatos.php';
+            require 'CLASS/Persona.php';
+
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];            
+
+            $CLASS_CAMPEONATO=new Campeonato($CONN);
+            $CLASS_PERSONA=new Persona($CONN);
+
+            $CLASS_CAMPEONATO->setId($id);
+            $data = $CLASS_CAMPEONATO->getCampeonatosForId();
+            if(isset($data)){
+                $user = $data['create_by'];
+                $CLASS_PERSONA->setId($user);
+    
+                $persona = $CLASS_PERSONA->getPersonaForId();
+                $data['create_by'] = $persona;
+
+                $dias = array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
+                $new_f_inicio =  $dias[date('N', strtotime($data['f_inicio']))];
+                $new_f_fin =  $dias[date('N', strtotime($data['f_fin']))];
+
+
+                $data['f_inicio'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_inicio']));
+                $data['f_fin'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_fin']));
+
+                $data['equipo'] = $CLASS_CAMPEONATO->getEquipos();
+
+                echo json_encode($data);
+            }else{
+                
+                $menssage = $CLASS_CAMPEONATO->getMessage();
+
+                echo json_encode($menssage);
+            }
+
+                
+
+            
+
+        break;
+
         case 'matchbychamp':
             require 'CLASS/Campeonatos.php';
 
@@ -304,6 +349,30 @@ if(isset($_GET['type'])){
             $CLASS_CAMPEONATO->setEstado($estado);
 
             $CLASS_CAMPEONATO->updateCampeonatosForId();
+           
+            $menssage = $CLASS_CAMPEONATO->getMessage();
+            
+
+            echo json_encode($menssage);
+
+
+        break;
+
+        case 'changeestado':
+            require 'CLASS/Campeonatos.php';
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];     
+
+            $CLASS_CAMPEONATO=new Campeonato($CONN);
+
+            $estado = '3';
+
+            $CLASS_CAMPEONATO->setId($id);
+            $CLASS_CAMPEONATO->setEstado($estado);
+
+            $CLASS_CAMPEONATO->changeEstado();
            
             $menssage = $CLASS_CAMPEONATO->getMessage();
             
@@ -590,7 +659,7 @@ if(isset($_GET['type'])){
             $CLASS_CAMPEONATO->setLogo("DefaultLogo.png");
             $CLASS_CAMPEONATO->setFoto_perfil('default.png');
             $CLASS_CAMPEONATO->setUbicacion('Default ubicacion');
-            $CLASS_CAMPEONATO->setEstado('4');
+            $CLASS_CAMPEONATO->setEstado('2');
             
             
             $CLASS_CAMPEONATO->autoGenerateCampeonato();
@@ -610,6 +679,17 @@ if(isset($_GET['type'])){
             $CLASS_LOGIN->setCreate_by(1);
             
             $data = $CLASS_LOGIN->getEquiposByCreator();
+
+            echo json_encode($data);
+
+        break;
+        
+        case 'listestados':
+            require 'CLASS/Estado.php';
+
+            $CLASS_ESTADO=new Estado($CONN);
+            
+            $data = $CLASS_ESTADO->listEstados();
 
             echo json_encode($data);
 
