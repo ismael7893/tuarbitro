@@ -93,22 +93,32 @@ if(isset($_GET['type'])){
 
                 $CLASS_CAMPEONATO->setId($id);
                 $data = $CLASS_CAMPEONATO->getCampeonatosForId();
-
-                $user = $data['create_by'];
-                $CLASS_PERSONA->setId($user);
+                if(isset($data)){
+                    $user = $data['create_by'];
+                    $CLASS_PERSONA->setId($user);
+        
+                    $persona = $CLASS_PERSONA->getPersonaForId();
+                    $data['create_by'] = $persona;
     
-                $persona = $CLASS_PERSONA->getPersonaForId();
-                $data['create_by'] = $persona;
+                    $data['contacto'] = $CLASS_CAMPEONATO->getContact();
+    
+                    $dias = array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
+                    $new_f_inicio =  $dias[date('N', strtotime($data['f_inicio']))];
+                    $new_f_fin =  $dias[date('N', strtotime($data['f_fin']))];
+    
+    
+                    $data['f_inicio'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_inicio']));
+                    $data['f_fin'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_fin']));
+    
+                    echo json_encode($data);
+                }else{
+                    
+                    $menssage = $CLASS_CAMPEONATO->getMessage();
 
-                $dias = array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
-                $new_f_inicio =  $dias[date('N', strtotime($data['f_inicio']))];
-                $new_f_fin =  $dias[date('N', strtotime($data['f_fin']))];
+                    echo json_encode($menssage);
+                }
 
-
-                $data['f_inicio'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_inicio']));
-                $data['f_fin'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_fin']));
-
-                echo json_encode($data);
+                
 
             }
 
@@ -174,6 +184,31 @@ if(isset($_GET['type'])){
 
 
         break;
+
+        case 'addcontacto':
+            require 'CLASS/Contactos.php';
+
+            if (!isset($_GET['campeonato'])) die;
+            if (!isset($_GET['numero'])) die;
+
+
+            $CLASS_CONTACTO=new Contacto($CONN);
+
+            $campeonato = $_GET['campeonato'];
+            $numero = $_GET['numero'];
+
+            $CLASS_CONTACTO->setCampeonato($campeonato);
+            $CLASS_CONTACTO->setNumero($numero);
+
+            $CLASS_CONTACTO->insertContacto();
+
+            $menssage = $CLASS_CONTACTO->getMessage();
+
+            echo json_encode($menssage);
+
+
+        break;
+
         case 'updatecampeonato':
             require 'CLASS/Campeonatos.php';
 
@@ -181,38 +216,42 @@ if(isset($_GET['type'])){
             
             $id = $_GET['id'];     
 
-            $CLASS_LOGIN=new Campeonato($CONN);
+            $CLASS_CAMPEONATO=new Campeonato($CONN);
 
             $nombre = 'nuevo campeonato editado ';
             $estadio = 'estadio 1 editado ';
             $organization = 'organization 1 editado ';
             $seguidores = 0;
             $description = 'campeonato 1 descripcion';
-            $tipe = 'default tipe';
-            $sport = 'default sport';
+            $tipe = 'default tipe editado';
+            $sport = 'default sport editado';
             $f_inicio = '2019-05-10';
             $f_fin = '2019-05-15';
             $logo = 'logo.jpg';
             $foto_perfil = 'foto_perfil.png';
+            $estado = '3';
 
-            $CLASS_LOGIN->setId($id);
-            $CLASS_LOGIN->setNombre($nombre);
-            $CLASS_LOGIN->setEstadio($estadio);
-            $CLASS_LOGIN->setOrganization($organization);
-            $CLASS_LOGIN->setSeguidores($seguidores);
-            $CLASS_LOGIN->setDescription($description);
-            $CLASS_LOGIN->setTipe($tipe);
-            $CLASS_LOGIN->setSport($sport);
-            $CLASS_LOGIN->setF_inicio($f_inicio);
-            $CLASS_LOGIN->setF_fin($f_fin);
-            $CLASS_LOGIN->setLogo($logo);
-            $CLASS_LOGIN->setFoto_perfil($foto_perfil);
+            $CLASS_CAMPEONATO->setId($id);
+            $CLASS_CAMPEONATO->setNombre($nombre);
+            $CLASS_CAMPEONATO->setEstadio($estadio);
+            $CLASS_CAMPEONATO->setOrganization($organization);
+            $CLASS_CAMPEONATO->setSeguidores($seguidores);
+            $CLASS_CAMPEONATO->setDescription($description);
+            $CLASS_CAMPEONATO->setTipe($tipe);
+            $CLASS_CAMPEONATO->setSport($sport);
+            $CLASS_CAMPEONATO->setF_inicio($f_inicio);
+            $CLASS_CAMPEONATO->setF_fin($f_fin);
+            $CLASS_CAMPEONATO->setLogo($logo);
+            $CLASS_CAMPEONATO->setFoto_perfil($foto_perfil);
+            $CLASS_CAMPEONATO->setEstado($estado);
 
-            $CLASS_LOGIN->updateCampeonatosForId();
+            $CLASS_CAMPEONATO->updateCampeonatosForId();
+           
+            $menssage = $CLASS_CAMPEONATO->getMessage();
+            
 
-            $data = $CLASS_LOGIN->getCampeonatos();
+            echo json_encode($menssage);
 
-            echo json_encode($data);
 
         break;
         case 'deletecampeonato':
@@ -222,15 +261,16 @@ if(isset($_GET['type'])){
             
             $id = $_GET['id'];     
 
-            $CLASS_LOGIN=new Campeonato($CONN);
+            $CLASS_CAMPEONATO=new Campeonato($CONN);
 
-            $CLASS_LOGIN->setId($id);
+            $CLASS_CAMPEONATO->setId($id);
 
-            $CLASS_LOGIN->deleteCampeonatosForId();
+            $CLASS_CAMPEONATO->deleteCampeonatosForId();
 
-            $data = $CLASS_LOGIN->getCampeonatos();
+            $menssage = $CLASS_CAMPEONATO->getMessage();
 
-            echo json_encode($data);
+            echo json_encode($menssage);
+
 
         break;
         case 'seguircampeonato':

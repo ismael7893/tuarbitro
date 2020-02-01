@@ -161,6 +161,9 @@ class Campeonato
             f_inicio = :f_inicio,
             f_fin = :f_fin,
             logo = :logo,
+            sport = :sport,
+            tipe = :tipe,
+            estado = :estado,
             foto_perfil = :foto_perfil 
         WHERE id = :id;";
 
@@ -176,10 +179,34 @@ class Campeonato
             $gsent->bindParam(':f_fin', $this->f_fin, PDO::PARAM_STR);
             $gsent->bindParam(':logo', $this->logo, PDO::PARAM_STR);
             $gsent->bindParam(':foto_perfil', $this->foto_perfil, PDO::PARAM_STR);
-
-            $gsent->execute();
+            $gsent->bindParam(':sport', $this->sport, PDO::PARAM_STR);
+            $gsent->bindParam(':tipe', $this->tipe, PDO::PARAM_STR);
+            $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
 
             //$gsent->debugDumpParams();
+          
+            if($gsent->execute()){
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+                    $this->setMessage('0',"Campeonato actualizado con exito!");
+
+                    $data = $this->getCampeonatosForId();
+                    
+                    $this->setData($data);
+                }else{
+                    $this->setErrors('105','Error al actualizar el campeonato!');
+                }
+
+                
+
+            }else{
+                $this->setErrors('105','Error al actualizar el campeonato!');
+
+            }
+
+            
 
             
         }catch (PDOException $e) {
@@ -207,9 +234,17 @@ class Campeonato
 
             $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
 
-            $gsent->execute();
-
             //$gsent->debugDumpParams();
+
+            if($gsent->execute()){
+
+                $this->setMessage('0',"Campeonato eliminado con exito!");
+
+            }else{
+                $this->setErrors('105','Error al eliminar el campeonato!');
+
+            }
+
 
             
         }catch (PDOException $e) {
