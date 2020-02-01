@@ -63,7 +63,7 @@ insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`s
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (21,'user2','nuevo campeonato editado ','estadio 1 edita','organization 1 edita',0,'campeonato 1 descripcion','default tipe editado','default sport editado','2019-05-10','2019-05-15','logo.jpg','foto_perfil.png','Default ubicacion','3');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (22,'user2','nuevo campeonato editado ','estadio 1 edita','organization 1 edita',0,'campeonato 1 descripcion','default tipe editado','default sport editado','2019-05-10','2019-05-15','logo.jpg','foto_perfil.png','Default ubicacion','3');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (23,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
-insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (24,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
+insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (24,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','3');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (25,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (26,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
 insert  into `campeonatos`(`id`,`create_by`,`nombre`,`estadio`,`organization`,`seguidores`,`description`,`tipe`,`sport`,`f_inicio`,`f_fin`,`logo`,`foto_perfil`,`ubicacion`,`estado`) values (27,'user2','Default nombre','Default estadio','Default organizacion',0,'Default descripcion','Default tipe','Default sport','2020-01-31','2020-01-31','DefaultLogo.png','default.png','Default ubicacion','4');
@@ -195,8 +195,8 @@ insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) 
 insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (30,'equipo 6','tecnico del equipo 6','imgperfil6.jpg','user2',1);
 insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (31,'equipo 7','tecnico del equipo 5','imgperfil5.jpg','user2',1);
 insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (32,'equipo 8','tecnico del equipo 5','imgperfil5.jpg','user2',1);
-insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (33,'equipo 9','tecnico del equipo 5','imgperfil5.jpg','user2',1);
-insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (34,'equipo 10','tecnico del equipo 5','imgperfil5.jpg','user2',1);
+insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (33,'equipo 9','tecnico del equipo 5','imgperfil5.jpg','user2',24);
+insert  into `equipos`(`id`,`name`,`tecnico`,`imagen`,`create_by`,`campeonato`) values (34,'equipo 10','tecnico del equipo 5','imgperfil5.jpg','user2',24);
 
 /*Table structure for table `estados` */
 
@@ -230,7 +230,7 @@ CREATE TABLE `jugadores` (
   `f_nacimiento` varchar(50) NOT NULL,
   `imagen` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `jugadores` */
 
@@ -257,7 +257,47 @@ insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`t
 insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (21,12,'Diego61',13,'delantero5','12345674','123456789','1970-01-01','12345674.jpg');
 insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (22,12,'Diego62',14,'delantero6','12345675','123456789','1970-01-01','12345675.jpg');
 insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (23,6,'Diego63',15,'delantero7','12345676','123456789','1970-01-01','12345676.jpg');
-insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (24,6,'Diego64',16,'delantero8','12345677','123456789','1970-01-01','12345677.jpg');
+insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (24,2,'Diego64',16,'delantero8','12345677','123456789','1970-01-01','12345677.jpg');
+
+/*Table structure for table `noticias` */
+
+DROP TABLE IF EXISTS `noticias`;
+
+CREATE TABLE `noticias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `fecha` varchar(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `directorio` varchar(100) NOT NULL,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `noticias` */
+
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (1,19,'2020-01-01','titulo de la noticia 1','videos/noticia1.mp4',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (2,19,'2020-01-02','titulo de la noticia 2','videos/noticia2.mp4',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (3,19,'2020-01-03','titulo de la noticia 3','videos/noticia3.mp4',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (4,19,'2020-01-04','titulo de la noticia 4','videos/noticia4.mp4',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (5,0,'fecha','title','directorio',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (6,20,'2020-10-10','0','default.mp4',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (7,20,'2020-10-10','0','default.mp4',0);
+insert  into `noticias`(`id`,`campeonato`,`fecha`,`title`,`directorio`,`likes`) values (8,20,'2020-10-10','0','default.mp4',1);
+
+/*Table structure for table `noticias_likes` */
+
+DROP TABLE IF EXISTS `noticias_likes`;
+
+CREATE TABLE `noticias_likes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `noticia` int(11) NOT NULL,
+  `user` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `noticias_likes` */
+
+insert  into `noticias_likes`(`id`,`noticia`,`user`) values (1,8,'user2');
 
 /*Table structure for table `partidos` */
 

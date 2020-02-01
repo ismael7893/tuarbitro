@@ -230,6 +230,31 @@ if(isset($_GET['type'])){
 
         break;
 
+        case 'addnoticia':
+            require 'CLASS/Noticias.php';
+
+                
+
+            $CLASS_NOTICIA=new Noticias($CONN);
+
+            $campeonato = 20;
+            $fecha = date('Y-m-d');
+            $title = 'new noticia';
+            $directorio = 'default.mp4';
+
+            $CLASS_NOTICIA->setCampeonato($campeonato);
+            $CLASS_NOTICIA->setFecha($fecha);
+            $CLASS_NOTICIA->setTitle($title);
+            $CLASS_NOTICIA->setDirectorio($directorio);
+         
+            $CLASS_NOTICIA->insertNoticia();
+
+            $menssage = $CLASS_NOTICIA->getMessage();
+
+            echo json_encode($menssage);
+
+        break;
+
         case 'addcontacto':
             require 'CLASS/Contactos.php';
 
@@ -357,6 +382,34 @@ if(isset($_GET['type'])){
 
 
         break;
+        case 'updatenoticia':
+            require 'CLASS/Noticias.php';
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];     
+
+            $CLASS_NOTICIA=new Noticias($CONN);
+            $campeonato = 19;
+            $fecha = '2020-12-12';
+            $title = 'new noticia editao';
+            $directorio = 'default.mp4';
+
+            $CLASS_NOTICIA->setId($id);
+            $CLASS_NOTICIA->setCampeonato($campeonato);
+            $CLASS_NOTICIA->setFecha($fecha);
+            $CLASS_NOTICIA->setTitle($title);
+            $CLASS_NOTICIA->setDirectorio($directorio);
+         
+            $CLASS_NOTICIA->updateNoticia();
+           
+            $menssage = $CLASS_NOTICIA->getMessage();
+            
+
+            echo json_encode($menssage);
+
+
+        break;
 
         case 'changeestado':
             require 'CLASS/Campeonatos.php';
@@ -470,6 +523,27 @@ if(isset($_GET['type'])){
 
 
         break;
+
+        case 'deletenoticia':
+            require 'CLASS/Noticias.php';
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];     
+
+            $CLASS_NOTICIA=new Noticias($CONN);
+
+            $CLASS_NOTICIA->setId($id);
+            
+            $CLASS_NOTICIA->deleteNoticia();
+           
+            $menssage = $CLASS_NOTICIA->getMessage();
+            
+
+            echo json_encode($menssage);
+
+
+        break;
         case 'deletejugador':
             require 'CLASS/Jugadores.php';
 
@@ -552,6 +626,41 @@ if(isset($_GET['type'])){
             $data = $CLASS_LOGIN->getCampeonatos();
 
             echo json_encode($data);
+
+        break;
+
+        case 'likenoticia':
+
+            if (!isset($_GET['noticia'])) die;
+            if (!isset($_GET['idUser'])) die;
+            
+            require 'CLASS/Noticia_Like.php';
+            require 'CLASS/Noticias.php';
+
+            
+            $CLASS_NOTICIA_LIKE=new Noticia_Like($CONN);
+            $CLASS_NOTICIA=new Noticias($CONN);
+
+
+            $noticia = $_GET['noticia'];     
+            $idUser = $_GET['idUser'];     
+
+            $CLASS_NOTICIA_LIKE->setUser($idUser);
+            $CLASS_NOTICIA_LIKE->setNoticia($noticia);
+
+            $ok = $CLASS_NOTICIA_LIKE->getNoticiaLike();
+
+            if($ok){
+                $CLASS_NOTICIA_LIKE->insertNoticiaLike();
+
+                $CLASS_NOTICIA->setId($noticia);
+                $CLASS_NOTICIA->changeLikeNoticia();
+
+            }
+
+            $menssage = $CLASS_NOTICIA_LIKE->getMessage();
+            
+            echo json_encode($menssage);
 
         break;
         
