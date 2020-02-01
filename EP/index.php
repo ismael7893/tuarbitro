@@ -209,6 +209,64 @@ if(isset($_GET['type'])){
 
         break;
 
+        case 'addequipo':
+
+            require 'CLASS/Equipos.php';
+
+            $CLASS_EQUIPO=new Equipos($CONN);
+
+            $name = 'nuevo campeonato1';
+            $tecnico = 'new tecnico';
+            $imagen = 'newimagen.png';
+            $create_by = 'new create_by';
+            $campeonato = 'new campeonato';
+
+            $CLASS_EQUIPO->setName($name);
+            $CLASS_EQUIPO->setTecnico($tecnico);
+            $CLASS_EQUIPO->setImagen($imagen);
+            $CLASS_EQUIPO->setCreate_by($create_by);
+            $CLASS_EQUIPO->setCampeonato($campeonato);
+
+            $CLASS_EQUIPO->insertEquipo();
+
+            $menssage = $CLASS_EQUIPO->getMessage();
+            
+            echo json_encode($menssage);
+
+        break;
+
+        case 'addjugador':
+
+            require 'CLASS/Jugadores.php';
+
+            $CLASS_JUGADOR=new Jugadores($CONN);
+
+            $name = 'new jugador';
+            $equipo = 1;
+            $numero = 10;
+            $posicion = 'delantero';
+            $documento = '123456789';
+            $telefono = 'new telefono';
+            $f_nacimiento = '1995-05-05';
+            $imagen = 'newjugador.png';
+            
+            $CLASS_JUGADOR->setName($name);
+            $CLASS_JUGADOR->setEquipo($equipo);
+            $CLASS_JUGADOR->setNumero($numero);
+            $CLASS_JUGADOR->setPosicion($posicion);
+            $CLASS_JUGADOR->setDocumento($documento);
+            $CLASS_JUGADOR->setTelefono($telefono);
+            $CLASS_JUGADOR->setF_nacimiento($f_nacimiento);
+            $CLASS_JUGADOR->setImagen($imagen);
+
+            $CLASS_JUGADOR->insertJugador();
+
+            $menssage = $CLASS_JUGADOR->getMessage();
+            
+            echo json_encode($menssage);
+
+        break;
+
         case 'updatecampeonato':
             require 'CLASS/Campeonatos.php';
 
@@ -254,6 +312,38 @@ if(isset($_GET['type'])){
 
 
         break;
+        
+        case 'updateequipo':
+
+            if (!isset($_GET['id'])) die;
+            
+            
+            require 'CLASS/Equipos.php';
+
+            $CLASS_EQUIPO=new Equipos($CONN);
+
+            $id = $_GET['id'];     
+            $name = 'nuevo campeonato1 editado';
+            $tecnico = 'new tecnico editado';
+            $imagen = 'newimageneditado.png';
+            $create_by = 'new create_by editado';
+            $campeonato = 1;
+
+            $CLASS_EQUIPO->setId($id);
+            $CLASS_EQUIPO->setName($name);
+            $CLASS_EQUIPO->setTecnico($tecnico);
+            $CLASS_EQUIPO->setImagen($imagen);
+            $CLASS_EQUIPO->setCreate_by($create_by);
+            $CLASS_EQUIPO->setCampeonato($campeonato);
+
+            $CLASS_EQUIPO->updateEquipo();
+
+            $menssage = $CLASS_EQUIPO->getMessage();
+            
+            echo json_encode($menssage);
+
+
+        break;
         case 'deletecampeonato':
             require 'CLASS/Campeonatos.php';
 
@@ -269,6 +359,26 @@ if(isset($_GET['type'])){
 
             $menssage = $CLASS_CAMPEONATO->getMessage();
 
+            echo json_encode($menssage);
+
+
+        break;
+        case 'deleteequipo':
+            if (!isset($_GET['id'])) die;
+            
+            
+            require 'CLASS/Equipos.php';
+
+            $CLASS_EQUIPO=new Equipos($CONN);
+
+            $id = $_GET['id'];     
+
+            $CLASS_EQUIPO->setId($id);
+
+            $CLASS_EQUIPO->deleteEquipo();
+
+            $menssage = $CLASS_EQUIPO->getMessage();
+            
             echo json_encode($menssage);
 
 
@@ -456,7 +566,7 @@ if(isset($_GET['type'])){
         case 'uploadimage':
 
             $target_dir = "IMG/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $target_file = $target_dir . "otronombre.".basename($_FILES["fileToUpload"]["type"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
             
@@ -469,6 +579,11 @@ if(isset($_GET['type'])){
                     $uploadOk = 0;
                 }
             }
+            
+            echo $target_file;
+            echo "<br/>";
+
+
             
             if (file_exists($target_file)) {
                 echo "Lo sentimos, este archivo ya existe.";

@@ -49,6 +49,189 @@ class Equipos
         
     }
 
+
+    public function insertEquipo(){
+
+        try {
+
+            $SQL="INSERT INTO equipos (
+                name,
+                tecnico,
+                imagen,
+                create_by,
+                campeonato
+              ) 
+              VALUES
+                (
+                :name,
+                :tecnico,
+                :imagen,
+                :create_by,
+                :campeonato
+                ) ;";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindParam(':name', $this->name, PDO::PARAM_STR);
+            $gsent->bindParam(':tecnico', $this->tecnico, PDO::PARAM_STR);
+            $gsent->bindParam(':imagen', $this->imagen, PDO::PARAM_STR);
+            $gsent->bindParam(':create_by', $this->create_by, PDO::PARAM_STR);
+            $gsent->bindParam(':campeonato', $this->campeonato, PDO::PARAM_STR);
+            
+            if($gsent->execute()){
+
+                //$gsent->debugDumpParams();
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Equipo agregado con exito!");
+
+                    return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al agregar equipo!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al crear equipo - probablemente el nombre ya este en uso');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
+    public function updateEquipo(){
+
+        try {
+
+            $SQL="UPDATE 
+            equipos 
+          SET
+            name = :name,
+            tecnico = :tecnico,
+            imagen = :imagen,
+            create_by = :create_by,
+            campeonato = :campeonato
+          WHERE id = :id ;";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $gsent->bindParam(':name', $this->name, PDO::PARAM_STR);
+            $gsent->bindParam(':tecnico', $this->tecnico, PDO::PARAM_STR);
+            $gsent->bindParam(':imagen', $this->imagen, PDO::PARAM_STR);
+            $gsent->bindParam(':create_by', $this->create_by, PDO::PARAM_STR);
+            $gsent->bindParam(':campeonato', $this->campeonato, PDO::PARAM_STR);
+
+            //$gsent->debugDumpParams();
+            
+            if($gsent->execute()){
+
+                
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Equipo actualizado con exito!");
+
+                    //return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al actualizar equipo!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al actualizar equipo!');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
+    public function deleteEquipo(){
+
+        try {
+
+            $SQL="DELETE 
+            FROM
+              `equipos` 
+            WHERE `id` = :id ;
+            
+            ";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            //$gsent->debugDumpParams();
+            
+            if($gsent->execute()){
+
+                
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Equipo eliminado con exito!");
+
+                    //return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al eliminar equipo!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al eliminar equipo!');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
+
     public function getEquipoByCampeonato(){
 
         try {
@@ -194,4 +377,10 @@ class Equipos
 	{
 		$this->campeonato = $campeonato;
 	}
+
+	public function getMessage()
+	{
+		return $this->message;
+	}
+
 }

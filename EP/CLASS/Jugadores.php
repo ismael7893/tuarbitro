@@ -83,9 +83,197 @@ class Jugadores
 
         }
         
+	}
+
+	public function insertJugador(){
+
+        try {
+
+            $SQL="INSERT INTO jugadores (
+				`equipo`,
+				`NAME`,
+				`numero`,
+				`posicion`,
+				`documento`,
+				`telefono`,
+				`f_nacimiento`,
+				`imagen`
+			  ) 
+			  VALUES
+				(
+				  :equipo,
+				  :name,
+				  :numero,
+				  :posicion,
+				  :documento,
+				  :telefono,
+				  :f_nacimiento,
+				  :image
+				) ;";
+
+            $gsent = $this->CONN->prepare($SQL);
+            
+            $gsent->bindValue(':equipo', $this->equipo, PDO::PARAM_INT);
+            $gsent->bindParam(':name', $this->name, PDO::PARAM_STR);
+            $gsent->bindValue(':numero', $this->numero, PDO::PARAM_INT);
+            $gsent->bindParam(':posicion', $this->posicion, PDO::PARAM_STR);
+            $gsent->bindParam(':documento', $this->documento, PDO::PARAM_STR);
+            $gsent->bindParam(':telefono', $this->telefono, PDO::PARAM_STR);
+            $gsent->bindParam(':f_nacimiento', $this->f_nacimiento, PDO::PARAM_STR);
+			$gsent->bindParam(':image', $this->image, PDO::PARAM_STR);
+			
+			//$gsent->debugDumpParams();
+
+            if($gsent->execute()){
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Jugador agregado con exito!");
+
+                    return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al agregar jugador!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al agregar jugador');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
     }
 
-  
+    public function updateJugador(){
+
+        try {
+
+            $SQL="UPDATE 
+            equipos 
+          SET
+            name = :name,
+            tecnico = :tecnico,
+            imagen = :imagen,
+            create_by = :create_by,
+            campeonato = :campeonato
+          WHERE id = :id ;";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $gsent->bindParam(':name', $this->name, PDO::PARAM_STR);
+            $gsent->bindParam(':tecnico', $this->tecnico, PDO::PARAM_STR);
+            $gsent->bindParam(':imagen', $this->imagen, PDO::PARAM_STR);
+            $gsent->bindParam(':create_by', $this->create_by, PDO::PARAM_STR);
+            $gsent->bindParam(':campeonato', $this->campeonato, PDO::PARAM_STR);
+
+            //$gsent->debugDumpParams();
+            
+            if($gsent->execute()){
+
+                
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Jugador actualizado con exito!");
+
+                    //return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al actualizar equipo!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al actualizar equipo!');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
+    public function deleteJugador(){
+
+        try {
+
+            $SQL="DELETE 
+            FROM
+              `equipos` 
+            WHERE `id` = :id ;
+            
+            ";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+            //$gsent->debugDumpParams();
+            
+            if($gsent->execute()){
+
+                
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Jugador eliminado con exito!");
+
+                    //return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al eliminar equipo!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al eliminar equipo!');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
 
 
 	public function getId()
@@ -177,5 +365,11 @@ class Jugadores
 	{
 		$this->imagen = $imagen;
 	}
+
+	public function getMessage()
+	{
+		return $this->message;
+	}
+
 }
     
