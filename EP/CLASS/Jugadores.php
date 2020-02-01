@@ -206,6 +206,57 @@ class Jugadores
         
     }
 
+    public function changeTeam(){
+
+        try {
+
+            $SQL="UPDATE 
+			jugadores 
+		  SET 
+			equipo = :equipo
+		  WHERE id = :id ;";
+
+            $gsent = $this->CONN->prepare($SQL);
+
+            $gsent->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $gsent->bindParam(':equipo', $this->equipo, PDO::PARAM_INT);
+			
+            //$gsent->debugDumpParams();
+            if($gsent->execute()){
+
+                $cuenta = $gsent->rowCount();
+
+                if($cuenta>0){
+
+                    $this->setMessage('0',"Jugador actualizado con exito!");
+
+                    //return  $this->CONN->lastInsertId();    
+
+                }else{
+                    $this->setErrors('105','Error al actualizar informacion del jugador!');
+                }
+
+            }
+            else{
+                $this->setErrors('105','Error al actualizar informacion del jugador!');
+
+                return null;
+            }
+
+        }catch (PDOException $e) {
+
+            $this->setErrors('101',"DataBase Error ".$e->getMessage());
+            
+
+        }catch (Exception $e) {
+
+            $this->setErrors('102',"General Error ".$e->getMessage());
+            
+
+        }
+        
+    }
+
     public function deleteJugador(){
 
         try {

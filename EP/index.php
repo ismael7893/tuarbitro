@@ -420,6 +420,27 @@ if(isset($_GET['type'])){
 
 
         break;
+        case 'changeteam':
+            require 'CLASS/Jugadores.php';
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];     
+            $equipo = 2;     
+
+            $CLASS_JUGADOR=new Jugadores($CONN);
+
+            $CLASS_JUGADOR->setId($id);
+            $CLASS_JUGADOR->setEquipo($equipo);
+
+            $CLASS_JUGADOR->changeTeam();
+
+            $menssage = $CLASS_JUGADOR->getMessage();
+
+            echo json_encode($menssage);
+
+
+        break;
         case 'deleteequipo':
             if (!isset($_GET['id'])) die;
             
@@ -608,11 +629,17 @@ if(isset($_GET['type'])){
         break;
 
         case 'playerbyteam':
+
+            if (!isset($_GET['team'])) die;
+
             require 'CLASS/Jugadores.php';
 
             $CLASS_LOGIN=new Jugadores($CONN);
 
-            $CLASS_LOGIN->setEquipo(1);
+            
+            $id = $_GET['team'];            
+
+            $CLASS_LOGIN->setEquipo($id);
             
             $data = $CLASS_LOGIN->getJugadoresByTeam();
 
