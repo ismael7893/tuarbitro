@@ -241,14 +241,14 @@ if(isset($_GET['type'])){
 
             $CLASS_JUGADOR=new Jugadores($CONN);
 
-            $name = 'new jugador';
+            $name = 'new ';
             $equipo = 1;
             $numero = 10;
             $posicion = 'delantero';
             $documento = '123456789';
-            $telefono = 'new telefono';
+            $telefono = '123123';
             $f_nacimiento = '1995-05-05';
-            $imagen = 'newjugador.png';
+            $image = 'newjugador.png';
             
             $CLASS_JUGADOR->setName($name);
             $CLASS_JUGADOR->setEquipo($equipo);
@@ -257,7 +257,7 @@ if(isset($_GET['type'])){
             $CLASS_JUGADOR->setDocumento($documento);
             $CLASS_JUGADOR->setTelefono($telefono);
             $CLASS_JUGADOR->setF_nacimiento($f_nacimiento);
-            $CLASS_JUGADOR->setImagen($imagen);
+            $CLASS_JUGADOR->setImage($image);
 
             $CLASS_JUGADOR->insertJugador();
 
@@ -344,6 +344,44 @@ if(isset($_GET['type'])){
 
 
         break;
+
+        case 'updatejugador':
+
+            if (!isset($_GET['id'])) die;
+            
+            require 'CLASS/Jugadores.php';
+
+            $CLASS_JUGADOR=new Jugadores($CONN);
+
+            $id = $_GET['id'];   
+            $name = 'new name editado';
+            $equipo = 2;
+            $numero = 5;
+            $posicion = 'd edit';
+            $documento = '0000000';
+            $telefono = '0000000';
+            $f_nacimiento = '1995-01-01';
+            $image = 'newjugadoredit.png';
+            
+            $CLASS_JUGADOR->setId($id);
+            $CLASS_JUGADOR->setName($name);
+            $CLASS_JUGADOR->setEquipo($equipo);
+            $CLASS_JUGADOR->setNumero($numero);
+            $CLASS_JUGADOR->setPosicion($posicion);
+            $CLASS_JUGADOR->setDocumento($documento);
+            $CLASS_JUGADOR->setTelefono($telefono);
+            $CLASS_JUGADOR->setF_nacimiento($f_nacimiento);
+            $CLASS_JUGADOR->setImage($image);
+
+            $CLASS_JUGADOR->updateJugador();
+
+            $menssage = $CLASS_JUGADOR->getMessage();
+            
+            echo json_encode($menssage);
+
+
+        break;
+
         case 'deletecampeonato':
             require 'CLASS/Campeonatos.php';
 
@@ -358,6 +396,25 @@ if(isset($_GET['type'])){
             $CLASS_CAMPEONATO->deleteCampeonatosForId();
 
             $menssage = $CLASS_CAMPEONATO->getMessage();
+
+            echo json_encode($menssage);
+
+
+        break;
+        case 'deletejugador':
+            require 'CLASS/Jugadores.php';
+
+            if (!isset($_GET['id'])) die;
+            
+            $id = $_GET['id'];     
+
+            $CLASS_JUGADOR=new Jugadores($CONN);
+
+            $CLASS_JUGADOR->setId($id);
+
+            $CLASS_JUGADOR->deleteJugador();
+
+            $menssage = $CLASS_JUGADOR->getMessage();
 
             echo json_encode($menssage);
 

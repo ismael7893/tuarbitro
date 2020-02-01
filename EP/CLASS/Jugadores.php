@@ -10,7 +10,7 @@ class Jugadores
     private $documento;
     private $telefono;
     private $f_nacimiento;
-    private $imagen;
+    private $image;
     private $message=[];
     private $errors=array();
     private $error=array();    
@@ -89,38 +89,20 @@ class Jugadores
 
         try {
 
-            $SQL="INSERT INTO jugadores (
-				`equipo`,
-				`NAME`,
-				`numero`,
-				`posicion`,
-				`documento`,
-				`telefono`,
-				`f_nacimiento`,
-				`imagen`
-			  ) 
+            $SQL="INSERT INTO jugadores 
 			  VALUES
-				(
-				  :equipo,
-				  :name,
-				  :numero,
-				  :posicion,
-				  :documento,
-				  :telefono,
-				  :f_nacimiento,
-				  :image
-				) ;";
+				( null,:equipo,:nombre,:numero,:posicion,:documento,:telefono,:f_nacimiento,:imagen) ;";
 
             $gsent = $this->CONN->prepare($SQL);
-            
-            $gsent->bindValue(':equipo', $this->equipo, PDO::PARAM_INT);
-            $gsent->bindParam(':name', $this->name, PDO::PARAM_STR);
-            $gsent->bindValue(':numero', $this->numero, PDO::PARAM_INT);
+		
+            $gsent->bindParam(':equipo', $this->equipo, PDO::PARAM_INT);
+            $gsent->bindParam(':nombre', $this->name, PDO::PARAM_STR);
+            $gsent->bindParam(':numero', $this->numero, PDO::PARAM_INT);
             $gsent->bindParam(':posicion', $this->posicion, PDO::PARAM_STR);
             $gsent->bindParam(':documento', $this->documento, PDO::PARAM_STR);
             $gsent->bindParam(':telefono', $this->telefono, PDO::PARAM_STR);
             $gsent->bindParam(':f_nacimiento', $this->f_nacimiento, PDO::PARAM_STR);
-			$gsent->bindParam(':image', $this->image, PDO::PARAM_STR);
+			$gsent->bindParam(':imagen', $this->image, PDO::PARAM_STR);
 			
 			//$gsent->debugDumpParams();
 
@@ -164,29 +146,32 @@ class Jugadores
         try {
 
             $SQL="UPDATE 
-            equipos 
-          SET
-            name = :name,
-            tecnico = :tecnico,
-            imagen = :imagen,
-            create_by = :create_by,
-            campeonato = :campeonato
-          WHERE id = :id ;";
+			jugadores 
+		  SET 
+			equipo = :equipo,
+			NAME = :nombre,
+			numero = :numero,
+			posicion = :posicion,
+			documento = :documento,
+			telefono = :telefono,
+			f_nacimiento = :f_nacimiento,
+			imagen = :imagen
+		  WHERE id = :id ;";
 
             $gsent = $this->CONN->prepare($SQL);
 
-            $gsent->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $gsent->bindParam(':name', $this->name, PDO::PARAM_STR);
-            $gsent->bindParam(':tecnico', $this->tecnico, PDO::PARAM_STR);
-            $gsent->bindParam(':imagen', $this->imagen, PDO::PARAM_STR);
-            $gsent->bindParam(':create_by', $this->create_by, PDO::PARAM_STR);
-            $gsent->bindParam(':campeonato', $this->campeonato, PDO::PARAM_STR);
-
+            $gsent->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $gsent->bindParam(':equipo', $this->equipo, PDO::PARAM_INT);
+            $gsent->bindParam(':nombre', $this->name, PDO::PARAM_STR);
+            $gsent->bindParam(':numero', $this->numero, PDO::PARAM_INT);
+            $gsent->bindParam(':posicion', $this->posicion, PDO::PARAM_STR);
+            $gsent->bindParam(':documento', $this->documento, PDO::PARAM_STR);
+            $gsent->bindParam(':telefono', $this->telefono, PDO::PARAM_STR);
+            $gsent->bindParam(':f_nacimiento', $this->f_nacimiento, PDO::PARAM_STR);
+			$gsent->bindParam(':imagen', $this->image, PDO::PARAM_STR);
+			
             //$gsent->debugDumpParams();
-            
             if($gsent->execute()){
-
-                
 
                 $cuenta = $gsent->rowCount();
 
@@ -197,12 +182,12 @@ class Jugadores
                     //return  $this->CONN->lastInsertId();    
 
                 }else{
-                    $this->setErrors('105','Error al actualizar equipo!');
+                    $this->setErrors('105','Error al actualizar informacion del jugador!');
                 }
 
             }
             else{
-                $this->setErrors('105','Error al actualizar equipo!');
+                $this->setErrors('105','Error al actualizar informacion del jugador!');
 
                 return null;
             }
@@ -227,10 +212,8 @@ class Jugadores
 
             $SQL="DELETE 
             FROM
-              `equipos` 
-            WHERE `id` = :id ;
-            
-            ";
+              `jugadores` 
+            WHERE `id` = :id ;";
 
             $gsent = $this->CONN->prepare($SQL);
 
@@ -274,6 +257,11 @@ class Jugadores
         }
         
     }
+
+	public function getMessage()
+	{
+		return $this->message;
+	}
 
 
 	public function getId()
@@ -356,20 +344,14 @@ class Jugadores
 		$this->f_nacimiento = $f_nacimiento;
 	}
 
-	public function getImagen()
+	public function getImage()
 	{
-		return $this->imagen;
+		return $this->image;
 	}
 
-	public function setImagen($imagen)
+	public function setImage($image)
 	{
-		$this->imagen = $imagen;
+		$this->image = $image;
 	}
-
-	public function getMessage()
-	{
-		return $this->message;
-	}
-
 }
     
