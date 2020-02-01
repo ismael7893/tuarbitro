@@ -76,6 +76,8 @@ if(isset($_GET['type'])){
 
         case 'champbyid':
             require 'CLASS/Campeonatos.php';
+            require 'CLASS/Persona.php';
+
 
             $ok=true;
 
@@ -87,10 +89,24 @@ if(isset($_GET['type'])){
                 
 
                 $CLASS_CAMPEONATO=new Campeonato($CONN);
+                $CLASS_PERSONA=new Persona($CONN);
 
                 $CLASS_CAMPEONATO->setId($id);
+                $data = $CLASS_CAMPEONATO->getCampeonatosForId();
 
-                $data=$CLASS_CAMPEONATO->getCampeonatosForId();
+                $user = $data['create_by'];
+                $CLASS_PERSONA->setId($user);
+    
+                $persona = $CLASS_PERSONA->getPersonaForId();
+                $data['create_by'] = $persona;
+
+                $dias = array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
+                $new_f_inicio =  $dias[date('N', strtotime($data['f_inicio']))];
+                $new_f_fin =  $dias[date('N', strtotime($data['f_fin']))];
+
+
+                $data['f_inicio'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_inicio']));
+                $data['f_fin'] = $new_f_inicio." ".date("d-m-Y", strtotime($data['f_fin']));
 
                 echo json_encode($data);
 
