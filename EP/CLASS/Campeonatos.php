@@ -18,16 +18,15 @@ class Campeonato
     private $estado;
     private $tipe;
     private $sport;
-
     private $message=[];
     private $errors=array();
-    private $error=array();    
+    private $error=array();
 
     public function __construct($p_CONN) {
         $this->CONN=$p_CONN;
     }
 
-    
+
 
     public function getCampeonatosForId(){
 
@@ -64,15 +63,15 @@ class Campeonato
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function getCampeonatosCreadosPorUsuario(){
@@ -98,19 +97,19 @@ class Campeonato
             }
 
             return $data;
-            
+
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function getCampeonatos(){
@@ -138,25 +137,25 @@ class Campeonato
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
-    
+
 
     public function updateCampeonatosForId(){
 
         try {
 
-            $SQL="UPDATE 
-            campeonatos 
+            $SQL="UPDATE
+            campeonatos
         SET
             nombre = :nombre,
             estadio = :estadio,
@@ -169,7 +168,7 @@ class Campeonato
             sport = :sport,
             tipe = :tipe,
             estado = :estado,
-            foto_perfil = :foto_perfil 
+            foto_perfil = :foto_perfil
         WHERE id = :id;";
 
             $gsent = $this->CONN->prepare($SQL);
@@ -189,7 +188,7 @@ class Campeonato
             $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
 
             //$gsent->debugDumpParams();
-          
+
             if($gsent->execute()){
 
                 $cuenta = $gsent->rowCount();
@@ -198,42 +197,42 @@ class Campeonato
                     $this->setMessage('0',"Campeonato actualizado con exito!");
 
                     $data = $this->getCampeonatosForId();
-                    
+
                     $this->setData($data);
                 }else{
                     $this->setErrors('105','Error al actualizar el campeonato!');
                 }
 
-                
+
 
             }else{
                 $this->setErrors('105','Error al actualizar el campeonato!');
 
             }
 
-            
 
-            
+
+
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function changeEstado(){
 
         try {
 
-            $SQL="UPDATE 
-            campeonatos 
+            $SQL="UPDATE
+            campeonatos
         SET
             estado = :estado
         WHERE id = :id;";
@@ -244,7 +243,7 @@ class Campeonato
             $gsent->bindParam(':estado', $this->estado, PDO::PARAM_STR);
 
             //$gsent->debugDumpParams();
-          
+
             if($gsent->execute()){
 
                 $cuenta = $gsent->rowCount();
@@ -253,39 +252,39 @@ class Campeonato
                     $this->setMessage('0',"Campeonato actualizado con exito!");
 
                     $data = $this->getCampeonatosForId();
-                    
+
                     $this->setData($data);
                 }else{
                     $this->setErrors('105','Error al actualizar el campeonato!');
                 }
 
-                
+
 
             }else{
                 $this->setErrors('105','Error al actualizar el campeonato!');
 
             }
 
-            
 
-            
+
+
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function deleteCampeonatosForId(){
 
-        
+
         try {
 
             $SQL="DELETE FROM campeonatos WHERE id=:id";
@@ -306,19 +305,19 @@ class Campeonato
             }
 
 
-            
+
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function insertCampeonato(){
@@ -340,7 +339,7 @@ class Campeonato
                 foto_perfil,
                 ubicacion,
                 estado
-              ) 
+              )
               VALUES
                 (
                 :create_by,
@@ -380,7 +379,7 @@ class Campeonato
                 //$gsent->debugDumpParams();
                 $this->setMessage('0',"Campeonato creado con exito!");
 
-                return  $this->CONN->lastInsertId();    
+                return  $this->CONN->lastInsertId();
 
 
 
@@ -394,15 +393,15 @@ class Campeonato
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function getContact(){
@@ -434,7 +433,7 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function getCategorias(){
@@ -466,12 +465,12 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function autoGenerateCampeonato(){
 
-        
+
         require 'Equipos.php';
         try {
 
@@ -481,19 +480,19 @@ class Campeonato
 
             if(isset($lastIdCampeonato)){
 
-                
+
 
                 $CLASS_PEOPLE=new Equipos($this->CONN);
-            
+
                 $CLASS_PEOPLE->setCreate_by($this->create_by);
-    
+
                 $this->setId($lastIdCampeonato);
-                
+
                 $data = $CLASS_PEOPLE->getEquiposByCreator();
-    
-                
-                
-    
+
+
+
+
                 $max = count($data);
                 $done = false;
                 $numbers;
@@ -511,43 +510,43 @@ class Campeonato
                 $team1 = "";
                 $team2 = "";
                 $partidos_creados = 0;
-    
+
                 while ($max > 0) {
-    
+
                     $team1 = $data[$numbers[$max-1]]['name'];
-                    
+
                     if(isset($numbers[$max-2])){
-                    
+
                         $team2 = $data[$numbers[$max-2]]['name'];
                     }
                     else{
                         $team2 = "";
-                        
+
                     }
                     $this->auto_CrearPartidos($team1,$team2);
                     $partidos_creados++;
                     $max=$max-2;
-                
+
                 }
-    
+
                 $ultimo_registro = $this->getCampeonatosForId();
                 $ultimo_registro['partidos'] = $partidos_creados;
-    
+
                 $this->setData($ultimo_registro);
-    
+
             }
 
 
 
-            
-            
+
+
 
         }catch (PDOException $e) {
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function auto_CrearPartidos($team1, $team2){
@@ -583,7 +582,7 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function seguirCampeonato($idUser){
@@ -614,14 +613,14 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function dejarDeSeguirCampeonato($idUser){
 
         try {
 
-            
+
             $SQL="DELETE FROM campeonato_seguimiento WHERE campeonato=:campeonato AND id_user=:id_user ;";
 
             $gsent = $this->CONN->prepare($SQL);
@@ -646,17 +645,17 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
-    
+
 
     public function updateCampeonato_Seguimiento(){
 
         try {
 
-            $SQL="UPDATE 
-            campeonatos 
+            $SQL="UPDATE
+            campeonatos
           SET
             seguidores = seguidores+1
         WHERE id = :id;";
@@ -669,27 +668,27 @@ class Campeonato
 
             //$gsent->debugDumpParams();
 
-            
+
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
     public function updateCampeonato_SeguimientoDejarDeSeguir(){
 
         try {
 
-            $SQL="UPDATE 
-            campeonatos 
+            $SQL="UPDATE
+            campeonatos
           SET
             seguidores = seguidores-1
         WHERE id = :id;";
@@ -702,19 +701,19 @@ class Campeonato
 
             //$gsent->debugDumpParams();
 
-            
+
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
 
@@ -747,7 +746,7 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function getComments_Partidos($id){
@@ -779,7 +778,7 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function getPartidos(){
@@ -810,7 +809,7 @@ class Campeonato
                 $row['estado'] = $CLASS_ESTADO->getEstadoById();
                 $data[]=$row;
             }
-            
+
 
             return $data;
 
@@ -819,7 +818,7 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
     public function getEquipos(){
@@ -843,7 +842,7 @@ class Campeonato
             while ($row =  $gsent->fetch()){
                 $data[]=$row;
             }
-            
+
 
             return $data;
 
@@ -852,7 +851,7 @@ class Campeonato
         }catch (Exception $e) {
             $this->setErrors('102',"General Error ".$e->getMessage());
         }
-        
+
     }
 
 
@@ -927,7 +926,7 @@ class Campeonato
     public function getMessage(){
 		return $this->message;
 	}
-    
+
 
 	public function setLogo($logo){
 		$this->logo = $logo;
@@ -945,7 +944,7 @@ class Campeonato
     }
 
     public function setData($data){
-        $this->message['data'] = $data;        
+        $this->message['data'] = $data;
     }
 
 	public function getSeguidores(){
@@ -1006,4 +1005,3 @@ class Campeonato
 		$this->sport = $sport;
 	}
 }
-    

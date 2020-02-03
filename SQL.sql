@@ -15,6 +15,45 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`tuarbitro` /*!40100 DEFAULT CHARACTER S
 
 USE `tuarbitro`;
 
+/*Table structure for table `arbitros` */
+
+DROP TABLE IF EXISTS `arbitros`;
+
+CREATE TABLE `arbitros` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `partido` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `funcion` varchar(30) NOT NULL,
+  `imagen` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `arbitros` */
+
+insert  into `arbitros`(`id`,`campeonato`,`create_by`,`partido`,`name`,`funcion`,`imagen`) values (2,20,'user2',1,'arbitro 1','ser arbitro','IMG/defaultArbitro.png');
+
+/*Table structure for table `campeonato_opciones` */
+
+DROP TABLE IF EXISTS `campeonato_opciones`;
+
+CREATE TABLE `campeonato_opciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `points_victory` int(11) NOT NULL,
+  `points_draw` int(11) NOT NULL,
+  `suspension_auto` int(11) NOT NULL,
+  `suspension_auto2` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `campeonato_opciones` */
+
+insert  into `campeonato_opciones`(`id`,`campeonato`,`create_by`,`points_victory`,`points_draw`,`suspension_auto`,`suspension_auto2`) values (3,20,'user2',1,1,1,1);
+insert  into `campeonato_opciones`(`id`,`campeonato`,`create_by`,`points_victory`,`points_draw`,`suspension_auto`,`suspension_auto2`) values (4,20,'user2',1,1,1,1);
+
 /*Table structure for table `campeonato_seguimiento` */
 
 DROP TABLE IF EXISTS `campeonato_seguimiento`;
@@ -170,6 +209,43 @@ CREATE TABLE `cuenta` (
 insert  into `cuenta`(`id`,`username`,`PASSWORD`,`role`) values ('1','user1','123','4');
 insert  into `cuenta`(`id`,`username`,`PASSWORD`,`role`) values ('2','user2','123','4');
 
+/*Table structure for table `encuesta_alternativas` */
+
+DROP TABLE IF EXISTS `encuesta_alternativas`;
+
+CREATE TABLE `encuesta_alternativas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `encuesta` int(11) NOT NULL,
+  `texto` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `encuesta_alternativas` */
+
+insert  into `encuesta_alternativas`(`id`,`campeonato`,`create_by`,`encuesta`,`texto`) values (2,20,'user2',1,'alternativa 1');
+
+/*Table structure for table `encuestas` */
+
+DROP TABLE IF EXISTS `encuestas`;
+
+CREATE TABLE `encuestas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `pregunta` varchar(250) NOT NULL,
+  `publico` tinyint(1) DEFAULT NULL,
+  `v_abierta` tinyint(1) DEFAULT NULL,
+  `showresult` tinyint(1) DEFAULT NULL,
+  `one_or_many` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `encuestas` */
+
+insert  into `encuestas`(`id`,`campeonato`,`create_by`,`pregunta`,`publico`,`v_abierta`,`showresult`,`one_or_many`) values (2,20,'user2','pregunta 1',1,0,1,0);
+
 /*Table structure for table `equipos` */
 
 DROP TABLE IF EXISTS `equipos`;
@@ -215,6 +291,49 @@ insert  into `estados`(`id`,`title`) values ('2','PENDIENTE');
 insert  into `estados`(`id`,`title`) values ('3','SUSPENDIDO');
 insert  into `estados`(`id`,`title`) values ('4','INACTIVO');
 
+/*Table structure for table `fases` */
+
+DROP TABLE IF EXISTS `fases`;
+
+CREATE TABLE `fases` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `title` varchar(20) NOT NULL,
+  `first` int(11) NOT NULL,
+  `last` int(11) NOT NULL,
+  `playoffs` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `fases` */
+
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (2,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (3,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (4,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (5,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (6,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (7,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (8,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (9,20,'user2','0',1,2,1);
+insert  into `fases`(`id`,`campeonato`,`create_by`,`title`,`first`,`last`,`playoffs`) values (10,20,'user2','new fase',1,2,0);
+
+/*Table structure for table `grupos` */
+
+DROP TABLE IF EXISTS `grupos`;
+
+CREATE TABLE `grupos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `grupos` */
+
+insert  into `grupos`(`id`,`campeonato`,`create_by`,`cantidad`) values (2,20,'user2',0);
+
 /*Table structure for table `jugadores` */
 
 DROP TABLE IF EXISTS `jugadores`;
@@ -258,6 +377,23 @@ insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`t
 insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (22,12,'Diego62',14,'delantero6','12345675','123456789','1970-01-01','12345675.jpg');
 insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (23,6,'Diego63',15,'delantero7','12345676','123456789','1970-01-01','12345676.jpg');
 insert  into `jugadores`(`id`,`equipo`,`NAME`,`numero`,`posicion`,`documento`,`telefono`,`f_nacimiento`,`imagen`) values (24,2,'Diego64',16,'delantero8','12345677','123456789','1970-01-01','12345677.jpg');
+
+/*Table structure for table `moderadores` */
+
+DROP TABLE IF EXISTS `moderadores`;
+
+CREATE TABLE `moderadores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `user` varchar(30) NOT NULL,
+  `estado` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `moderadores` */
+
+insert  into `moderadores`(`id`,`campeonato`,`create_by`,`user`,`estado`) values (1,20,'user2','user1','DESHABILITADO');
 
 /*Table structure for table `noticias` */
 
@@ -383,6 +519,34 @@ insert  into `premios`(`id`,`campeonato`,`title`,`description`) values (1,1,'1 p
 insert  into `premios`(`id`,`campeonato`,`title`,`description`) values (2,1,'2 puesto','Cup 2');
 insert  into `premios`(`id`,`campeonato`,`title`,`description`) values (3,1,'3 puesto','Cup 3');
 insert  into `premios`(`id`,`campeonato`,`title`,`description`) values (4,1,'4 puesto','Silver Medal');
+
+/*Table structure for table `ranking_opciones` */
+
+DROP TABLE IF EXISTS `ranking_opciones`;
+
+CREATE TABLE `ranking_opciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `campeonato` int(11) NOT NULL,
+  `create_by` varchar(30) NOT NULL,
+  `puntos` int(11) NOT NULL,
+  `goles_contra` int(11) NOT NULL,
+  `victorias` int(11) NOT NULL,
+  `diferencia_goles` int(11) NOT NULL,
+  `goles_a_favor` int(11) NOT NULL,
+  `conflicto` int(11) NOT NULL,
+  `aprovechamiento` int(11) NOT NULL,
+  `tarjeta` int(11) NOT NULL,
+  `wo` int(11) NOT NULL,
+  `tarjeta_roja` int(11) NOT NULL,
+  `tarjeta_amarilla` int(11) NOT NULL,
+  `tarjeta_azul` int(11) NOT NULL,
+  `sorteo` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `ranking_opciones` */
+
+insert  into `ranking_opciones`(`id`,`campeonato`,`create_by`,`puntos`,`goles_contra`,`victorias`,`diferencia_goles`,`goles_a_favor`,`conflicto`,`aprovechamiento`,`tarjeta`,`wo`,`tarjeta_roja`,`tarjeta_amarilla`,`tarjeta_azul`,`sorteo`) values (3,20,'user2',1,2,3,4,5,6,7,8,9,10,11,12,13);
 
 /*Table structure for table `roles` */
 

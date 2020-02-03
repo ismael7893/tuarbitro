@@ -7,7 +7,7 @@ class Role
     private $description;
     private $message=[];
     private $errors=array();
-    private $error=array();    
+    private $error=array();
 
     public function __construct($P_CONN) {
         $this->CONN=$P_CONN;
@@ -25,7 +25,7 @@ class Role
     }
 
     public function setData($data){
-        $this->message['data'] = $data;        
+        $this->message['data'] = $data;
     }
 
     public function getRole(){
@@ -47,7 +47,7 @@ class Role
             $result = $gsent->fetch();
 
             if($result){
-                
+
                 return $result;
 
             }else{
@@ -58,15 +58,15 @@ class Role
         }catch (PDOException $e) {
 
             $this->setErrors('101',"DataBase Error ".$e->getMessage());
-            
+
 
         }catch (Exception $e) {
 
             $this->setErrors('102',"General Error ".$e->getMessage());
-            
+
 
         }
-        
+
     }
 
 
