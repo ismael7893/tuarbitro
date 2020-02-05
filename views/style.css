@@ -1,0 +1,107 @@
+body .perfil {
+  background-color: silver;
+  width: 80%;
+  height: 250px; }
+  body .perfil img {
+    margin-top: 8px;
+    height: auto;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto; }
+.bg-success-im{
+  background: #4caf50;
+}
+body .mv-100 {
+  background-color: silver;
+  width: 20%;
+  height: 130px; }
+   body .list-equipment ul {
+    list-style-type: none;
+    padding: 0; }
+    body .list-equipment ul li {
+      cursor: pointer;
+      position: relative;
+      width: 100%; }
+      body .list-equipment ul li img {
+        left: 0;
+        position: absolute;
+        border-radius: 50%;
+        -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.5);
+        height: 50px;
+        width: 50px;
+        padding-left: 0; }
+      body .list-equipment ul li > * {
+        padding-left: 55px; }
+
+  body a {
+    color: rgba(255, 255, 255, 0.5); }
+    body a.navbar-brand {
+      color: white; }
+  body .nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    body .nav select {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border: 0;
+      background: none;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 4px !important; }
+      body .nav select option {
+        color: #555; }
+  body .perfil {
+    border-radius: 3px;
+    width: 80% !important;
+    min-height: 280px;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center; }
+    body .perfil img {
+      width: 70%;
+      margin: 0 auto !important; }
+  body .mv-100 {
+    width: 98% !important;
+    margin-left: 1%;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px; }
+  body .submenu {
+    background: #4caf50; }
+  body .line-bottom {
+    padding-bottom: 20px !important;
+    position: relative; }
+    body .line-bottom:before {
+      content: '';
+      background: rgba(0, 0, 0, 0.1);
+      height: 1px;
+      width: 90%;
+      position: absolute;
+      bottom: 20px; }
+  body .flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    body .flex button {
+      padding: 8px 8px; }
+  body .perfil {
+    width: 100% !important;
+    background: none;
+    height: auto !important; }
+  #list-champions{
+    list-style-type: none;
+    padding: 0;
+  }
+  #list-champions li{
+    cursor: pointer;
+    background: white;
+    padding-bottom: 2px !important;
+    margin-bottom: 5px;
+  }
+  #list-champions li:before{
+    bottom: 0;
+  }
+  #list-champions li:hover{
+    background: #eee;
+  }
